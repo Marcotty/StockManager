@@ -13,7 +13,7 @@ public partial class ShoppingPage : ContentPage
         InitializeComponent();
         _stockService = stockService;
         var shoppingPage = _stockService.GetDefaultItems();
-        Items = new ObservableCollection<Item>(shoppingPage);
+        Items = [.. shoppingPage];
         BindingContext = this;
     }
 
@@ -31,16 +31,16 @@ public partial class ShoppingPage : ContentPage
         });
         _stockService.AddNewItem();
         OnPropertyChanged(nameof(Items));
+        //((ListView)sender).ScrollTo(Items.Count - 1, position: ScrollToPosition.End, true);
+        //((ListView)sender).Focus();
     }
 
     private void OnValidateClicked(object sender, EventArgs e)
     {
-        if (sender is not Button button)
-            return;
-        var itemsToRemove = Items.Where(errand => errand.InStock).ToList();
-        foreach (var errand in itemsToRemove)
+        var itemsToRemove = Items.Where(item => item.InStock).ToList();
+        foreach (var item in itemsToRemove)
         {
-            Items.Remove(errand);
+            Items.Remove(item);
         }
         OnPropertyChanged(nameof(Items));
     }
@@ -65,7 +65,8 @@ public partial class ShoppingPage : ContentPage
     {
         if (sender is not Button button)
             return;
-        var stackLayout = button.Parent as StackLayout;
+        var grid = button.Parent as Grid;
+        var stackLayout = grid?.Children.OfType<StackLayout>().FirstOrDefault();
         var entry = stackLayout?.Children.OfType<Entry>().FirstOrDefault();
         var item = entry?.BindingContext as Item;
         if (item != null)
