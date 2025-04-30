@@ -8,12 +8,26 @@ public partial class ShoppingPage : ContentPage
 {
     private readonly IStockService _stockService;
     public ObservableCollection<Item> Items { get; set; }
+    public ObservableCollection<Item> DeletedItems { get; set; }
+    private bool _isReverseEnabled;
+    public bool IsReverseEnabled
+    {
+        get => _isReverseEnabled;
+        set
+        {
+            _isReverseEnabled = value;
+            OnPropertyChanged(nameof(IsReverseEnabled));
+        }
+    }
+
     public ShoppingPage(IStockService stockService)
     {
         InitializeComponent();
         _stockService = stockService;
         var shoppingPage = _stockService.GetDefaultItems();
         Items = [.. shoppingPage];
+        DeletedItems = [];
+        IsReverseEnabled = false;
         BindingContext = this;
     }
 
@@ -73,7 +87,24 @@ public partial class ShoppingPage : ContentPage
         {
             Items.Remove(item);
             _stockService.DeleteItem(item.Id);
+            DeletedItems.Add(item);
             OnPropertyChanged(nameof(Items));
+
+            IsReverseEnabled = DeletedItems.Count > 0;
+        }
+    }
+
+    private void OnReverseClicked(object sender, EventArgs e)
+    {
+        if (DeletedItems.Count > 0)
+        {
+            var lastDeletedItem = DeletedItems.Last();
+            DeletedItems.Remove(lastDeletedItem);
+            Items.Add(lastDeletedItem);//TODO put at the same place before deletion
+            _stockService.AddItem(lastDeletedItem);
+            OnPropertyChanged(nameof(Items));
+
+            IsReverseEnabled = DeletedItems.Count > 0;
         }
     }
 }

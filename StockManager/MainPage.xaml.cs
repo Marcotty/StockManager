@@ -8,6 +8,7 @@ namespace StockManager
     public partial class MainPage : ContentPage
     {
         private readonly IStockService _stockService;
+        private ShoppingPage _shoppingPage;
         public ICommand StorageCommand { get; set; }
         public ICommand ShoppingCommand { get; set; }
         public ICommand RecipesCommand { get; set; }
@@ -20,6 +21,7 @@ namespace StockManager
             StorageCommand = new Command(OnStorageButtonClicked);
             ShoppingCommand = new Command(OnShoppingButtonClicked);
             RecipesCommand = new Command(OnRecipesButtonClicked);
+            _shoppingPage = new ShoppingPage(stockService);
             BindingContext = this;
         }
 
@@ -29,7 +31,7 @@ namespace StockManager
         }
         private async void OnShoppingButtonClicked()
         {
-            await Navigation.PushAsync(new ShoppingPage(_stockService));
+            await Navigation.PushAsync(_shoppingPage);
         }
         private async void OnRecipesButtonClicked()
         {
