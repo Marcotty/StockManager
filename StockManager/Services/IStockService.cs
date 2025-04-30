@@ -2,9 +2,9 @@
 
 namespace StockManager.Services
 {
-    internal interface IStockService
+    public interface IStockService
     {
-        List<Item> getDefaultItems();
+        List<Item> GetDefaultItems();
         List<Item> GetItems();
         void UpdateItem(Item item);
         void DeleteItem(string errandId);

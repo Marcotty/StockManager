@@ -3,7 +3,7 @@ using System.Text;
 
 namespace StockManager.Services
 {
-    internal class StockService : IStockService
+    public class StockService : IStockService
     {
         private List<Item> _items;
         public StockService() 
@@ -142,7 +142,7 @@ namespace StockManager.Services
             }
         }
 
-        public List<Item> getDefaultItems()
+        public List<Item> GetDefaultItems()
         {
             _items =
            [

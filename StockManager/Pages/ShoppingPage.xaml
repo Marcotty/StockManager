@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StockManager.Pages.ShoppingPage"
+             xmlns:models="clr-namespace:StockManager.Model"
+             Title="ShoppingPage">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="Add" 
+                 IconImageSource="add.png" 
+                 Order="Primary" 
+                 Priority="0" 
+                 Clicked="OnAddItem" />
+
+        <ToolbarItem Text="V" 
+                 IconImageSource="{AppThemeBinding Light=validate_icon_light.png, Dark=validate_icon_dark.png}" 
+                 Order="Primary" 
+                 Priority="1" 
+                 Clicked="OnValidateClicked" />
+
+        <ToolbarItem IconImageSource="{AppThemeBinding Light=menu_light.png, Dark=menu_dark.png}" 
+                 Order="Primary" 
+                 Priority="1" 
+                 Clicked="OnValidateClicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <ListView ItemsSource="{Binding Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Item">
+                        <ViewCell>
+                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                                <CheckBox Grid.Column="0" IsChecked="{Binding InStock}" VerticalOptions="Center" CheckedChanged="OnCheckBoxChanged" />
+                                <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+                                    <Entry Text="{Binding Name}" VerticalOptions="Center" />
+                                </StackLayout>
+                                <Button Grid.Column="2"  
+                                Text="X"  
+                                FontAttributes="Bold"  
+                                Clicked="OnDeleteClicked"  
+                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}"  
+                                BackgroundColor="Transparent"  
+                                VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

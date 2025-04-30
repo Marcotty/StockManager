@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using StockManager.Pages;
+using StockManager.Services;
 
 namespace StockManager
 {
@@ -18,6 +20,11 @@ namespace StockManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<IStockService, StockService>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<StoragePage>();
+            builder.Services.AddTransient<ShoppingPage>();
+            builder.Services.AddTransient<RecipesPage>();
 
             return builder.Build();
         }
