@@ -7,7 +7,7 @@ namespace StockManager.Services
         List<Item> getDefaultItems();
         List<Item> GetItems();
         void UpdateItem(Item item);
-        Task DeleteItem(string errandId);
+        void DeleteItem(string errandId);
         void AddItem(Item item);
         void AddNewItem();
         void SaveListToFile();

@@ -29,12 +29,12 @@ namespace StockManager.Services
             });
         }
 
-        public async Task DeleteItem(string ItemId)
+        public void DeleteItem(string ItemId)
         {
             var item = _items.FirstOrDefault(i => i.Id == ItemId);
             if (item != null)
             {
-                await Task.Run(() => _items.Remove(item));
+                _items.Remove(item);
             }
         }
 
