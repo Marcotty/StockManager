@@ -19,12 +19,20 @@
                 Priority="0"   
                 Clicked="OnAddItem" />
 
-        <ToolbarItem Text="Validate"   
+        <ToolbarItem Text="Validate shopping list"   
         IconImageSource="{AppThemeBinding Light=validate_icon_light.png, Dark=validate_icon_dark.png}"   
         Order="Secondary"   
         Priority="1"   
-        Clicked="OnValidateClicked" />  
-   </ContentPage.ToolbarItems>  
+        Clicked="OnValidateClicked" />
+        <ToolbarItem Text="Clear shopping list"   
+        Order="Secondary"   
+        Priority="2"   
+        Clicked="OnClearShoppingListClicked" />
+        <ToolbarItem Text="Load shopping list"   
+        Order="Secondary"   
+        Priority="2"   
+        Clicked="OnLoadShoppingListClicked" />
+    </ContentPage.ToolbarItems>  
 
    <ScrollView>  
        <VerticalStackLayout>  
@@ -34,8 +42,8 @@
                        <ViewCell>  
                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">  
                                <CheckBox Grid.Column="0" IsChecked="{Binding InStock}" VerticalOptions="Center" CheckedChanged="OnCheckBoxChanged" />  
-                               <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">  
-                                   <Entry Text="{Binding Name}" VerticalOptions="Center" />  
+                               <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+                                    <Entry Text="{Binding Name}" VerticalOptions="Center" TextChanged = "OnEntryTextChanged"/>  
                                </StackLayout>  
                                <Button Grid.Column="2"    
                                Text="X"    

@@ -1,6 +1,5 @@
 ﻿using StockManager.Pages;
 using StockManager.Services;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace StockManager

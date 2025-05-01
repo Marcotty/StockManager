@@ -8,7 +8,7 @@ public partial class ShoppingPage : ContentPage
 {
     private readonly IStockService _stockService;
     public ObservableCollection<Item> Items { get; set; }
-    public ObservableCollection<Item> DeletedItems { get; set; }
+    public ObservableCollection<Tuple<Item, int>> DeletedItems { get; set; }
     private bool _isReverseEnabled;
     public bool IsReverseEnabled
     {
@@ -24,11 +24,35 @@ public partial class ShoppingPage : ContentPage
     {
         InitializeComponent();
         _stockService = stockService;
-        var shoppingPage = _stockService.GetDefaultItems();
+        //var shoppingPage = _stockService.GetDefaultItems();
+        var shoppingPage = _stockService.LoadListFromFile();
         Items = [.. shoppingPage];
         DeletedItems = [];
         IsReverseEnabled = false;
         BindingContext = this;
+    }
+
+    private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (sender is Entry entry && entry.BindingContext is Item item)
+        {
+            if (_stockService.GetItemById(item.Id) != null)
+            {
+                item.Name = e.NewTextValue;
+                _stockService.UpdateItem(item);
+            }
+        }
+    }
+
+    private void OnLoadShoppingListClicked(object sender, EventArgs e)
+    {
+        var items = _stockService.LoadListFromFile();
+        Items.Clear();
+        foreach (var item in items)
+        {
+            Items.Add(item);
+        }
+        OnPropertyChanged(nameof(Items));
     }
 
     private void OnAddItem(object sender, EventArgs e)
@@ -45,8 +69,9 @@ public partial class ShoppingPage : ContentPage
         });
         _stockService.AddNewItem();
         OnPropertyChanged(nameof(Items));
-        //((ListView)sender).ScrollTo(Items.Count - 1, position: ScrollToPosition.End, true);
-        //((ListView)sender).Focus();
+
+        // Set focus on the last added item
+       
     }
 
     private void OnValidateClicked(object sender, EventArgs e)
@@ -85,9 +110,9 @@ public partial class ShoppingPage : ContentPage
         var item = entry?.BindingContext as Item;
         if (item != null)
         {
+            DeletedItems.Add(new Tuple<Item, int>(item, Items.IndexOf(item)));
             Items.Remove(item);
             _stockService.DeleteItem(item.Id);
-            DeletedItems.Add(item);
             OnPropertyChanged(nameof(Items));
 
             IsReverseEnabled = DeletedItems.Count > 0;
@@ -100,11 +125,40 @@ public partial class ShoppingPage : ContentPage
         {
             var lastDeletedItem = DeletedItems.Last();
             DeletedItems.Remove(lastDeletedItem);
-            Items.Add(lastDeletedItem);//TODO put at the same place before deletion
-            _stockService.AddItem(lastDeletedItem);
+            Items.Insert(lastDeletedItem.Item2, lastDeletedItem.Item1);
+            _stockService.AddItem(lastDeletedItem.Item1);
             OnPropertyChanged(nameof(Items));
 
             IsReverseEnabled = DeletedItems.Count > 0;
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        try
+        {
+            // Save the current state of items to the file
+            _stockService.SaveListToFile();
+
+            // Log or perform any cleanup actions
+            Console.WriteLine("ShoppingPage is exiting. State saved.");
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that occur during the exit process
+            Console.WriteLine($"Error during OnDisappearing: {ex.Message}");
+        }
+    }
+
+    private async void OnClearShoppingListClicked(object sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlert("Confirm", "Are you sure you want to clear the shopping list?\nThis action is irreversible", "Yes", "No");
+        if (confirm)
+        {
+            Items.Clear();
+            _stockService.ClearItems();
         }
     }
 }

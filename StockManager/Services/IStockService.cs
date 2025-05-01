@@ -2,7 +2,7 @@
 
 namespace StockManager.Services
 {
-    public interface IStockService
+    public interface IStockService : IDisposable
     {
         List<Item> GetDefaultItems();
         List<Item> GetItems();
@@ -12,5 +12,7 @@ namespace StockManager.Services
         void AddNewItem();
         void SaveListToFile();
         List<Item> LoadListFromFile();
+        void ClearItems();
+        Item? GetItemById(string Id);
     }
 }

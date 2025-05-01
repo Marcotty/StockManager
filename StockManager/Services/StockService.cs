@@ -7,8 +7,8 @@ namespace StockManager.Services
     {
         private List<Item> _items;
         public StockService() 
-        { 
-            _items ??= [];
+        {
+            _items = LoadListFromFile();
         }
         public void AddItem(Item item)
         {
@@ -27,6 +27,16 @@ namespace StockManager.Services
                 ExpirationDate = DateTime.Now,
                 InStock = false
             });
+        }
+
+        public Item? GetItemById(string Id)
+        {
+            return _items.FirstOrDefault(i => i.Id == Id);
+        }
+
+        public void ClearItems()
+        {
+            _items.Clear();
         }
 
         public void DeleteItem(string ItemId)
@@ -55,33 +65,39 @@ namespace StockManager.Services
                 // Check if the file exists
                 if (!File.Exists(filePath))
                 {
-                    throw new FileNotFoundException("The stock file does not exist.");
-                }
-
-                // Read the file content
-                var fileContent = File.ReadAllText(filePath);
-
-                // Parse the file content and populate the errands list
-                var itemsData = fileContent.Split(new[] { new string('-', 20) }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var errandData in itemsData)
-                {
-                    var lines = errandData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                    if (lines.Length < 4) continue;
-
-                    var id = lines[0].Replace("Id: ", "").Trim();
-                    var name = lines[1].Replace("Name: ", "").Trim();
-                    var description = lines[2].Replace("Description: ", "").Trim();
-                    var quantity = int.Parse(lines[3].Replace("Quantity: ", "").Trim());
-                    var location = lines[4].Replace("Location: ", "").Trim();
-                    var expirationDate = DateTime.Parse(lines[5].Replace("Expiration Date: ", "").Trim());
-                    var inStock = bool.Parse(lines[6].Replace("In Stock: ", "").Trim());
-
-                    var item = new Item
+                    if (!File.Exists(filePath))
                     {
-                        Name = name,
-                    };
-                    _items ??= [];
-                    _items.Add(item);
+                        File.Create(filePath).Close();
+                        _items ??= [];
+                    }
+                }
+                else
+                {
+                    // Read the file content
+                    var fileContent = File.ReadAllText(filePath);
+
+                    // Parse the file content and populate the errands list
+                    var itemsData = fileContent.Split(new[] { new string('-', 20) }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var errandData in itemsData)
+                    {
+                        var lines = errandData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                        if (lines.Length < 4) continue;
+
+                        var id = lines[0].Replace("Id: ", "").Trim();
+                        var name = lines[1].Replace("Name: ", "").Trim();
+                        var description = lines[2].Replace("Description: ", "").Trim();
+                        var quantity = int.Parse(lines[3].Replace("Quantity: ", "").Trim());
+                        var location = lines[4].Replace("Location: ", "").Trim();
+                        var expirationDate = DateTime.Parse(lines[5].Replace("Expiration Date: ", "").Trim());
+                        var inStock = bool.Parse(lines[6].Replace("In Stock: ", "").Trim());
+
+                        var item = new Item
+                        {
+                            Name = name,
+                        };
+                        _items ??= [];
+                        _items.Add(item);
+                    }
                 }
             }
             catch (Exception ex)
@@ -101,18 +117,20 @@ namespace StockManager.Services
                 {
                     File.Create(filePath).Dispose();
                 }
-
                 var stringBuilder = new StringBuilder();
                 foreach (var item in _items)
                 {
-                    stringBuilder.AppendLine($"Id: {item.Id}");
-                    stringBuilder.AppendLine($"Name: {item.Name}");
-                    stringBuilder.AppendLine($"Description: {item.Description}");
-                    stringBuilder.AppendLine($"Quantity: {item.Quantity}");
-                    stringBuilder.AppendLine($"Location: {item.Location}");
-                    stringBuilder.AppendLine($"Expiration Date: {item.ExpirationDate.ToShortDateString()}");
-                    stringBuilder.AppendLine($"In Stock: {item.InStock}");
-                    stringBuilder.AppendLine(new string('-', 20));
+                    if (item.Name != string.Empty)
+                    {
+                        stringBuilder.AppendLine($"Id: {item.Id}");
+                        stringBuilder.AppendLine($"Name: {item.Name}");
+                        stringBuilder.AppendLine($"Description: {item.Description}");
+                        stringBuilder.AppendLine($"Quantity: {item.Quantity}");
+                        stringBuilder.AppendLine($"Location: {item.Location}");
+                        stringBuilder.AppendLine($"Expiration Date: {item.ExpirationDate.ToShortDateString()}");
+                        stringBuilder.AppendLine($"In Stock: {item.InStock}");
+                        stringBuilder.AppendLine(new string('-', 20));
+                    }
                 }
 
                 File.WriteAllText(filePath, stringBuilder.ToString());
@@ -168,6 +186,11 @@ namespace StockManager.Services
                new Item(Guid.NewGuid().ToString(), "Coffee", "Ground coffee, 250 g", 2, "Supermarket Q", DateTime.Now.AddMonths(12), false)
            ];
             return _items;
+        }
+
+        public void Dispose()
+        {
+            SaveListToFile();
         }
     }
 }

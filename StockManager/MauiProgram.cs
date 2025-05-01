@@ -18,10 +18,19 @@ namespace StockManager
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            
             builder.Services.AddSingleton<IStockService, StockService>();
+            builder.Services.AddSingleton<App>();
             builder.Services.AddSingleton<MainPage>();
+
+            // Preload data
+            var serviceProvider = builder.Services.BuildServiceProvider();
+            var stockService = serviceProvider.GetService<IStockService>();
+            stockService?.LoadListFromFile();
+
             builder.Services.AddTransient<StoragePage>();
             builder.Services.AddTransient<ShoppingPage>();
             builder.Services.AddTransient<RecipesPage>();
