@@ -5,14 +5,14 @@ namespace StockManager.Services
 {
     public class StockService : IStockService
     {
-        private List<Item> _items;
+        private List<Item> _shoppingItems;
         public StockService() 
         {
-            _items = LoadListFromFile();
+            _shoppingItems = LoadListFromFile();
         }
         public void AddItem(Item item)
         {
-            _items.Add(item);
+            _shoppingItems.Add(item);
         }
 
         public void AddNewItem()
@@ -31,32 +31,32 @@ namespace StockManager.Services
 
         public Item? GetItemById(string Id)
         {
-            return _items.FirstOrDefault(i => i.Id == Id);
+            return _shoppingItems.FirstOrDefault(i => i.Id == Id);
         }
 
         public void ClearItems()
         {
-            _items.Clear();
+            _shoppingItems.Clear();
         }
 
         public void DeleteItem(string ItemId)
         {
-            var item = _items.FirstOrDefault(i => i.Id == ItemId);
+            var item = _shoppingItems.FirstOrDefault(i => i.Id == ItemId);
             if (item != null)
             {
-                _items.Remove(item);
+                _shoppingItems.Remove(item);
             }
         }
 
         public List<Item> GetItems()
         {
-            return _items;
+            return _shoppingItems;
         }
 
         public List<Item> LoadListFromFile()
         {
-            if (_items != null)
-                return _items;
+            if (_shoppingItems != null)
+                return _shoppingItems;
             try
             {
                 // Define the file path to load the list
@@ -68,7 +68,7 @@ namespace StockManager.Services
                     if (!File.Exists(filePath))
                     {
                         File.Create(filePath).Close();
-                        _items ??= [];
+                        _shoppingItems ??= [];
                     }
                 }
                 else
@@ -95,8 +95,8 @@ namespace StockManager.Services
                         {
                             Name = name,
                         };
-                        _items ??= [];
-                        _items.Add(item);
+                        _shoppingItems ??= [];
+                        _shoppingItems.Add(item);
                     }
                 }
             }
@@ -104,7 +104,7 @@ namespace StockManager.Services
             {
                 throw new Exception($"An error occurred while loading the stock: {ex.Message}");
             }
-            return _items ?? [];
+            return _shoppingItems ?? [];
         }
 
         public void SaveListToFile()
@@ -118,7 +118,7 @@ namespace StockManager.Services
                     File.Create(filePath).Dispose();
                 }
                 var stringBuilder = new StringBuilder();
-                foreach (var item in _items)
+                foreach (var item in _shoppingItems)
                 {
                     if (item.Name != string.Empty)
                     {
@@ -143,11 +143,11 @@ namespace StockManager.Services
 
         public void UpdateItem(Item newItem)
         {
-            Item? item = _items.FirstOrDefault(i => i.Id == newItem.Id);
+            Item? item = _shoppingItems.FirstOrDefault(i => i.Id == newItem.Id);
             if (item == null)
             {
                 newItem.Id = Guid.NewGuid().ToString();
-                _items.Add(newItem);
+                _shoppingItems.Add(newItem);
             }
             else
             {
@@ -162,7 +162,7 @@ namespace StockManager.Services
 
         public List<Item> GetDefaultItems()
         {
-            _items =
+            _shoppingItems =
            [
                new Item(Guid.NewGuid().ToString(), "Apples", "Red apples, 1 kg", 10, "Supermarket A", DateTime.Now.AddDays(7), true),
                new Item(Guid.NewGuid().ToString(), "Milk", "2 liters of whole milk", 5, "Supermarket B", DateTime.Now.AddDays(5), false),
@@ -185,7 +185,7 @@ namespace StockManager.Services
                new Item(Guid.NewGuid().ToString(), "Juice", "Orange juice, 1 liter", 6, "Supermarket P", DateTime.Now.AddDays(7), true),
                new Item(Guid.NewGuid().ToString(), "Coffee", "Ground coffee, 250 g", 2, "Supermarket Q", DateTime.Now.AddMonths(12), false)
            ];
-            return _items;
+            return _shoppingItems;
         }
 
         public void Dispose()
