@@ -139,6 +139,11 @@ public partial class ShoppingPage : ContentPage
 
         try
         {
+            _stockService.ClearItems();
+            foreach (Item item in Items)
+            {
+                _stockService.AddItem(item);
+            }
             // Save the current state of items to the file
             _stockService.SaveListToFile();
 

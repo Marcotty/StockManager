@@ -26,11 +26,6 @@ namespace StockManager
             builder.Services.AddSingleton<App>();
             builder.Services.AddSingleton<MainPage>();
 
-            // Preload data
-            var serviceProvider = builder.Services.BuildServiceProvider();
-            var stockService = serviceProvider.GetService<IStockService>();
-            stockService?.LoadListFromFile();
-
             builder.Services.AddTransient<StoragePage>();
             builder.Services.AddTransient<ShoppingPage>();
             builder.Services.AddTransient<RecipesPage>();
