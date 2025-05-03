@@ -5,6 +5,7 @@ namespace StockManager.Services
 {
     public class StockService : IStockService
     {
+        private List<Item>? _stockItems;
         private List<Item> _shoppingItems;
         public StockService() 
         {
@@ -25,6 +26,7 @@ namespace StockManager.Services
                 Quantity = 0,
                 Location = string.Empty,
                 ExpirationDate = DateTime.Now,
+                InCart = false,
                 InStock = false
             });
         }
@@ -93,7 +95,13 @@ namespace StockManager.Services
 
                         var item = new Item
                         {
+                            Id = id,
                             Name = name,
+                            Description = description,
+                            Quantity = quantity,
+                            Location = location,
+                            ExpirationDate = expirationDate,
+                            InCart = false,
                         };
                         _shoppingItems ??= [];
                         _shoppingItems.Add(item);
@@ -156,35 +164,35 @@ namespace StockManager.Services
                 item.Quantity = newItem.Quantity;
                 item.Location = newItem.Location;
                 item.ExpirationDate = newItem.ExpirationDate;
-                item.InStock = newItem.InStock;
+                item.InCart = newItem.InCart;
             }
         }
 
         public List<Item> GetDefaultItems()
         {
-            _shoppingItems =
-           [
-               new Item(Guid.NewGuid().ToString(), "Apples", "Red apples, 1 kg", 10, "Supermarket A", DateTime.Now.AddDays(7), true),
-               new Item(Guid.NewGuid().ToString(), "Milk", "2 liters of whole milk", 5, "Supermarket B", DateTime.Now.AddDays(5), false),
-               new Item(Guid.NewGuid().ToString(), "Bread", "Whole grain bread", 3, "Supermarket C", DateTime.Now.AddDays(3), true),
-               new Item(Guid.NewGuid().ToString(), "Eggs", "1 dozen eggs", 12, "Supermarket B", DateTime.Now.AddDays(10), false),
-               new Item(Guid.NewGuid().ToString(), "Rice", "Basmati rice, 5 kg", 2, "Supermarket D", DateTime.Now.AddMonths(6), false),
-               new Item(Guid.NewGuid().ToString(), "Chicken", "Fresh chicken, 2 kg", 1, "Supermarket E", DateTime.Now.AddDays(2), true),
-               new Item(Guid.NewGuid().ToString(), "Butter", "Salted butter, 500 g", 4, "Supermarket B", DateTime.Now.AddDays(15), false),
-               new Item(Guid.NewGuid().ToString(), "Pasta", "Spaghetti, 1 kg", 6, "Supermarket F", DateTime.Now.AddMonths(12), true),
-               new Item(Guid.NewGuid().ToString(), "Tomatoes", "Fresh tomatoes, 1 kg", 8, "Supermarket G", DateTime.Now.AddDays(4), false),
-               new Item(Guid.NewGuid().ToString(), "Cheese", "Cheddar cheese, 500 g", 2, "Supermarket B", DateTime.Now.AddDays(20), false),
-               new Item(Guid.NewGuid().ToString(), "Bananas", "Yellow bananas, 1 kg", 7, "Supermarket H", DateTime.Now.AddDays(3), true),
-               new Item(Guid.NewGuid().ToString(), "Oranges", "Fresh oranges, 1 kg", 5, "Supermarket I", DateTime.Now.AddDays(6), false),
-               new Item(Guid.NewGuid().ToString(), "Potatoes", "White potatoes, 2 kg", 10, "Supermarket J", DateTime.Now.AddMonths(1), true),
-               new Item(Guid.NewGuid().ToString(), "Carrots", "Fresh carrots, 1 kg", 6, "Supermarket K", DateTime.Now.AddDays(7), false),
-               new Item(Guid.NewGuid().ToString(), "Onions", "Red onions, 1 kg", 8, "Supermarket L", DateTime.Now.AddMonths(2), true),
-               new Item(Guid.NewGuid().ToString(), "Garlic", "Fresh garlic, 500 g", 3, "Supermarket M", DateTime.Now.AddMonths(3), false),
-               new Item(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt, 1 kg", 4, "Supermarket N", DateTime.Now.AddDays(10), true),
-               new Item(Guid.NewGuid().ToString(), "Cereal", "Breakfast cereal, 500 g", 5, "Supermarket O", DateTime.Now.AddMonths(6), false),
-               new Item(Guid.NewGuid().ToString(), "Juice", "Orange juice, 1 liter", 6, "Supermarket P", DateTime.Now.AddDays(7), true),
-               new Item(Guid.NewGuid().ToString(), "Coffee", "Ground coffee, 250 g", 2, "Supermarket Q", DateTime.Now.AddMonths(12), false)
-           ];
+            _shoppingItems = new List<Item>
+           {
+               new Item(Guid.NewGuid().ToString(), "Apples", "Red apples, 1 kg", 10, "Supermarket A", DateTime.Now.AddDays(7), true, false),
+               new Item(Guid.NewGuid().ToString(), "Milk", "2 liters of whole milk", 5, "Supermarket B", DateTime.Now.AddDays(5), false, false),
+               new Item(Guid.NewGuid().ToString(), "Bread", "Whole grain bread", 3, "Supermarket C", DateTime.Now.AddDays(3), true, false),
+               new Item(Guid.NewGuid().ToString(), "Eggs", "1 dozen eggs", 12, "Supermarket B", DateTime.Now.AddDays(10), false, false),
+               new Item(Guid.NewGuid().ToString(), "Rice", "Basmati rice, 5 kg", 2, "Supermarket D", DateTime.Now.AddMonths(6), false, false),
+               new Item(Guid.NewGuid().ToString(), "Chicken", "Fresh chicken, 2 kg", 1, "Supermarket E", DateTime.Now.AddDays(2), true, false),
+               new Item(Guid.NewGuid().ToString(), "Butter", "Salted butter, 500 g", 4, "Supermarket B", DateTime.Now.AddDays(15), false, false),
+               new Item(Guid.NewGuid().ToString(), "Pasta", "Spaghetti, 1 kg", 6, "Supermarket F", DateTime.Now.AddMonths(12), true, false),
+               new Item(Guid.NewGuid().ToString(), "Tomatoes", "Fresh tomatoes, 1 kg", 8, "Supermarket G", DateTime.Now.AddDays(4), false, false),
+               new Item(Guid.NewGuid().ToString(), "Cheese", "Cheddar cheese, 500 g", 2, "Supermarket B", DateTime.Now.AddDays(20), false, false),
+               new Item(Guid.NewGuid().ToString(), "Bananas", "1 kg", 7, "Supermarket H", DateTime.Now.AddDays(3), true, false),
+               new Item(Guid.NewGuid().ToString(), "Oranges", "1 kg", 5, "Supermarket I", DateTime.Now.AddDays(6), false, false),
+               new Item(Guid.NewGuid().ToString(), "Potatoes", "White potatoes, 2 kg", 10, "Supermarket J", DateTime.Now.AddMonths(1), true, false),
+               new Item(Guid.NewGuid().ToString(), "Carrots", "Fresh carrots, 1 kg", 6, "Supermarket K", DateTime.Now.AddDays(7), false, false),
+               new Item(Guid.NewGuid().ToString(), "Onions", "Red onions, 1 kg", 8, "Supermarket L", DateTime.Now.AddMonths(2), true, false),
+               new Item(Guid.NewGuid().ToString(), "Garlic", "Fresh garlic, 500 g", 3, "Supermarket M", DateTime.Now.AddMonths(3), false, false),
+               new Item(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt, 1 kg", 4, "Supermarket N", DateTime.Now.AddDays(10), true, false),
+               new Item(Guid.NewGuid().ToString(), "Cereal", "Breakfast cereal, 500 g", 5, "Supermarket O", DateTime.Now.AddMonths(6), false, false),
+               new Item(Guid.NewGuid().ToString(), "Juice", "Orange juice, 1 liter", 6, "Supermarket P", DateTime.Now.AddDays(7), true, false),
+               new Item(Guid.NewGuid().ToString(), "Coffee", "Ground coffee, 250 g", 2, "Supermarket Q", DateTime.Now.AddMonths(12), false, false)
+           };
             return _shoppingItems;
         }
 

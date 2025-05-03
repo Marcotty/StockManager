@@ -32,5 +32,4 @@ namespace StockManager
             _stockService?.LoadListFromFile();
         }
     }
-    }
 }

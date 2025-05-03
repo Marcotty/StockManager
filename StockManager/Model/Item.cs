@@ -14,6 +14,7 @@ namespace StockManager.Model
         public int Quantity { get; set; }
         public string Location { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public bool InCart { get; set; }
         public bool InStock { get; set; }
 
         public Item()
@@ -24,10 +25,11 @@ namespace StockManager.Model
             Quantity = 0;
             Location = string.Empty;
             ExpirationDate = DateTime.Now;
+            InCart = false;
             InStock = false;
         }
 
-        public Item(string id, string name, string description, int quantity, string location, DateTime expirationDate, bool inStock)
+        public Item(string id, string name, string description, int quantity, string location, DateTime expirationDate, bool inCart, bool inStock)
         {
             Id = id;
             Name = name;
@@ -35,6 +37,7 @@ namespace StockManager.Model
             Quantity = quantity;
             Location = location;
             ExpirationDate = expirationDate;
+            InCart = inCart;
             InStock = inStock;
         }
     }
