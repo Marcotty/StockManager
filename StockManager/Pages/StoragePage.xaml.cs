@@ -1,6 +1,7 @@
 using StockManager.Model;
 using StockManager.Services;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace StockManager.Pages;
@@ -25,14 +26,29 @@ public partial class StoragePage : ContentPage
         }
     }
 
-    private Item _selectedItem;
-    public Item SelectedItem
+    private Item? _selectedItem;
+    public Item? SelectedItem
     {
         get => _selectedItem;
         set
         {
             _selectedItem = value;
             OnPropertyChanged();
+        }
+    }
+
+    private async void OnAddItem(object sender, EventArgs e)
+    {
+        string id = _stockService.AddNewItem();
+        Item? newItem = _stockService.GetItemById(id);
+        if (newItem != null)
+        {
+            await Navigation.PushAsync(new EditItemInStock(_stockService, newItem));
+            FilteredStock.Clear();
+            FilteredStock = new ObservableCollection<Item>(_stockService.GetItems());
+            FilteredStock.Remove(newItem);
+            FilteredStock.Insert(0, newItem);
+            OnPropertyChanged(nameof(FilteredStock));
         }
     }
 
@@ -96,7 +112,6 @@ public partial class StoragePage : ContentPage
             {
                 Console.WriteLine($"After Item: {item.Name}, {item.Description}");
             }
-
         }
     }
 
@@ -136,6 +151,19 @@ public partial class StoragePage : ContentPage
         if (collectionView != null)
         {
             collectionView.SelectedItem = null;
+        }
+    }
+
+    private async void OnEditClicked(object sender, EventArgs e)
+    {
+        // Handle edit button click
+        if (sender is Button button && button.BindingContext is Item item)
+        {
+            // Navigate to the edit page or perform edit logic
+            await Navigation.PushAsync(new EditItemInStock(_stockService, item));
+            FilteredStock.Clear();
+            FilteredStock = new ObservableCollection<Item>(_stockService.GetItems());
+            OnPropertyChanged(nameof(FilteredStock));
         }
     }
 

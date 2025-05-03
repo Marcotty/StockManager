@@ -9,7 +9,7 @@ namespace StockManager.Services
         void UpdateItem(Item item);
         void DeleteItem(string errandId);
         void AddItem(Item item);
-        void AddNewItem();
+        string AddNewItem();
         void SaveListToFile();
         List<Item> LoadListFromFile();
         void ClearItems();

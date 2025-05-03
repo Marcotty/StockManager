@@ -4,7 +4,21 @@
              x:Class="StockManager.Pages.StoragePage"  
              xmlns:models="clr-namespace:StockManager.Model"
              xmlns:local="clr-namespace:StockManager.Pages"  
-             Title="Stock">  
+             Title="Stock">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Text="&lt;-"   
+            IconImageSource="add.png"   
+            Order="Primary"   
+            Priority="0"
+            IsEnabled="{Binding IsReverseEnabled}"
+            Clicked="OnReverseClicked" />-->
+
+        <ToolbarItem Text="Add"   
+            IconImageSource="add.png"   
+            Order="Primary"   
+            Priority="0"   
+            Clicked="OnAddItem" />
+    </ContentPage.ToolbarItems>
     <ScrollView>  
         <VerticalStackLayout>  
             <SearchBar Placeholder="Search items"  
@@ -30,11 +44,11 @@
                             <!-- Item Content -->
                             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                                 <CheckBox Grid.Column="0" x:Name="selectCheckBox" IsChecked="False" CheckedChanged="SelectCheckBoxChanged" VerticalOptions="Center" />
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
                                     <Label Text="{Binding Name}" VerticalOptions="Center"/>
                                     <Label Text="{Binding Description}" VerticalOptions="Center"/>
                                 </VerticalStackLayout>
-                                <StackLayout Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
+                                <StackLayout Padding="10" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
                                     <Label Text="{Binding Quantity}" VerticalOptions="Center"/>
                                     <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
                                 </StackLayout>
@@ -42,12 +56,21 @@
 
                             <!-- Frame for tapped item -->
                             <Frame x:Name="DetailsFrame" IsVisible="{Binding IsSelected}" Padding="10" BackgroundColor="LightGray">
-                                <VerticalStackLayout Padding="10">
-                                    <Label Padding="8" Text="Details:" FontAttributes="Bold" />
-                                    <Label Padding="8" Text="{Binding Name, StringFormat='Name: {0}'}" />
-                                    <Label Padding="8" Text="{Binding Description, StringFormat='Description: {0}'}" />
-                                    <Label Padding="8" Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
-                                    <Label Padding="8" Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                <VerticalStackLayout>
+                                    <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                                        <VerticalStackLayout Padding="20" Grid.Column="1" VerticalOptions="Center">
+                                            <Label Grid.Column="2" Padding="8" Text="Details:" FontAttributes="Bold" />
+                                            <Label Text="{Binding Name, StringFormat='Name: {0}'}" />
+                                            <Label Text="{Binding Description, StringFormat='Description: {0}'}" />
+                                            <Label Text="{Binding Location, StringFormat='Location: {0}'}" />
+
+                                        </VerticalStackLayout>
+                                        <StackLayout Padding="20" Grid.Column="3" Orientation="Vertical" VerticalOptions="Center">
+                                            <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
+                                            <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                        </StackLayout>
+                                    </Grid>
+                                    <Button x:Name="EditButton" HorizontalOptions="Center" Text="Edit" Clicked="OnEditClicked" />
                                 </VerticalStackLayout>
                             </Frame>
                         </VerticalStackLayout>

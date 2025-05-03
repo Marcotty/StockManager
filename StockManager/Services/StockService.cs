@@ -16,11 +16,12 @@ namespace StockManager.Services
             _shoppingItems.Add(item);
         }
 
-        public void AddNewItem()
+        public string AddNewItem()
         {
+            string id = Guid.NewGuid().ToString();
             AddItem(new Item
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = id,
                 Name = string.Empty,
                 Description = string.Empty,
                 Quantity = 0,
@@ -29,6 +30,7 @@ namespace StockManager.Services
                 InCart = false,
                 InStock = false
             });
+            return id;
         }
 
         public Item? GetItemById(string Id)
