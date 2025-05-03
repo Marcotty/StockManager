@@ -1,6 +1,7 @@
 using StockManager.Model;
 using StockManager.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace StockManager.Pages;
 
@@ -10,9 +11,31 @@ public partial class StoragePage : ContentPage
     public ObservableCollection<Item> Stock { get; set; }
     public ObservableCollection<Item> FilteredStock { get; set; }
     public ObservableCollection<Tuple<Item, bool>> SelectedStock { get; set; }
+    public ICommand ItemTappedCommand => new Command<Item>(OnItemTapped);
     private List<Item> _allItems;
     public bool IsPanelEnabled { get; set; }
-    
+    private bool _isFrameVisible;
+    public bool IsFrameVisible
+    {
+        get => _isFrameVisible;
+        set
+        {
+            _isFrameVisible = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private Item _selectedItem;
+    public Item SelectedItem
+    {
+        get => _selectedItem;
+        set
+        {
+            _selectedItem = value;
+            OnPropertyChanged();
+        }
+    }
+
     public StoragePage(IStockService stockService)
     {
         InitializeComponent();
@@ -75,6 +98,104 @@ public partial class StoragePage : ContentPage
             }
 
         }
+    }
+
+    private async void OnItemTapped(Item selectedItem)
+    {
+        // Handle tapped item logic
+        selectedItem.IsSelected = !selectedItem.IsSelected;
+        foreach (var item in FilteredStock)
+        {
+            if (item != selectedItem)
+            {
+                item.IsSelected = false;
+            }
+        }
+        // Animate the panel visibility
+        var frame = FindFrameForItem(selectedItem); // Helper method to locate the Frame
+        if (frame != null)
+        {
+            if (selectedItem.IsSelected)
+            {
+                // Animate showing the panel
+                frame.Opacity = 0;
+                frame.IsVisible = true;
+                await frame.FadeTo(1, 250); // Fade in over 250ms
+                await frame.TranslateTo(0, 0, 250, Easing.CubicOut); // Slide in
+            }
+            else
+            {
+                // Animate hiding the panel
+                await frame.FadeTo(0, 250); // Fade out over 250ms
+                await frame.TranslateTo(0, 20, 250, Easing.CubicIn); // Slide out
+                frame.IsVisible = false;
+            }
+        }
+
+        var collectionView = this.FindByName<CollectionView>("collectionView");
+        if (collectionView != null)
+        {
+            collectionView.SelectedItem = null;
+        }
+    }
+
+    private async void OnItemTapped(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is VisualElement element && element.BindingContext is Item selectedItem)
+        {
+            // Toggle the IsSelected property of the tapped item
+            selectedItem.IsSelected = !selectedItem.IsSelected;
+
+            // Deselect all other items
+            foreach (var item in FilteredStock)
+            {
+                if (item != selectedItem)
+                {
+                    item.IsSelected = false;
+                }
+            }
+
+            // Animate the panel visibility
+            var frame = FindFrameForItem(selectedItem); // Helper method to locate the Frame
+            if (frame != null)
+            {
+                if (selectedItem.IsSelected)
+                {
+                    // Animate showing the panel
+                    frame.Opacity = 0;
+                    frame.IsVisible = true;
+                    await frame.FadeTo(1, 250); // Fade in over 250ms
+                    await frame.TranslateTo(0, 0, 250, Easing.CubicOut); // Slide in
+                }
+                else
+                {
+                    // Animate hiding the panel
+                    await frame.FadeTo(0, 250); // Fade out over 250ms
+                    await frame.TranslateTo(0, 20, 250, Easing.CubicIn); // Slide out
+                    frame.IsVisible = false;
+                }
+            }
+
+            ((CollectionView)sender).SelectedItem = null;
+        }
+    }
+
+    private Frame? FindFrameForItem(Item item)
+    {
+        // Assuming the CollectionView is named "collectionView"
+        var collectionView = this.FindByName<CollectionView>("collectionView");
+        if (collectionView == null) return null;
+
+        // Workaround for the missing 'ContainerFromItem' method
+        foreach (var visualElement in collectionView.LogicalChildren.OfType<VisualElement>())
+        {
+            if (visualElement.BindingContext == item)
+            {
+                return visualElement.FindByName<Frame>("DetailsFrame"); // Replace "DetailsFrame" with the x:Name of your Frame
+            }
+        }
+
+        return null;
     }
 
     private void SortFilteredStock(string? criteria)

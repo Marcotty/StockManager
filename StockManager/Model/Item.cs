@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StockManager.Model
 {
-    public class Item
+    public class Item : INotifyPropertyChanged
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -16,6 +17,19 @@ namespace StockManager.Model
         public DateTime ExpirationDate { get; set; }
         public bool InCart { get; set; }
         public bool InStock { get; set; }
+        private bool _isSelected ;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
 
         public Item()
         {
@@ -27,6 +41,7 @@ namespace StockManager.Model
             ExpirationDate = DateTime.Now;
             InCart = false;
             InStock = false;
+            IsSelected = false;
         }
 
         public Item(string id, string name, string description, int quantity, string location, DateTime expirationDate, bool inCart, bool inStock)
@@ -39,6 +54,12 @@ namespace StockManager.Model
             ExpirationDate = expirationDate;
             InCart = inCart;
             InStock = inStock;
+            IsSelected = false;
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
