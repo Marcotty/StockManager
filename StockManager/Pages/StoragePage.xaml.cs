@@ -82,7 +82,17 @@ public partial class StoragePage : ContentPage
         bool confirm = await DisplayAlert("Confirm", "Add selected items to shopping list ?", "Yes", "No");
         if (confirm)
         {
-             
+             foreach(var item in SelectedStock)
+             {
+                item.Item1.InCart = true;
+                _stockService.AddItemToShoppingList(item.Item1);
+            }
+
+            confirm = await DisplayAlert("Confirm", "Items added to shopping list. \n\n Go to shopping list ?", "Yes", "No");
+            if (confirm)
+            {
+               await Navigation.PushAsync(new ShoppingPage(_stockService));
+            }
         }
     }
     private void OnDeleteItems(object sender, EventArgs e)
