@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:StockManager.Pages"  
              Title="Stock">
     <ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="Cart"   
+            IconImageSource="cart.png"   
+            Order="Primary"   
+            Priority="0"   
+            Clicked="OnAddToCartItems" />
+        
         <!--<ToolbarItem Text="&lt;-"   
             IconImageSource="add.png"   
             Order="Primary"   
@@ -13,6 +20,12 @@
             IsEnabled="{Binding IsReverseEnabled}"
             Clicked="OnReverseClicked" />-->
 
+        <ToolbarItem Text="Delete"   
+            IconImageSource="delete.png"   
+            Order="Primary"   
+            Priority="0"   
+            Clicked="OnDeleteItems" />
+        
         <ToolbarItem Text="Add"   
             IconImageSource="add.png"   
             Order="Primary"   

@@ -37,6 +37,17 @@ public partial class StoragePage : ContentPage
         }
     }
 
+    public StoragePage(IStockService stockService)
+    {
+        InitializeComponent();
+        _stockService = stockService;
+        _allItems = _stockService.GetDefaultItems();
+        Stock = new ObservableCollection<Item>(_allItems);
+        FilteredStock = new ObservableCollection<Item>(_allItems);
+        SelectedStock = new ObservableCollection<Tuple<Item, bool>>();
+        BindingContext = this;
+    }
+
     private async void OnAddItem(object sender, EventArgs e)
     {
         string id = _stockService.AddNewItem();
@@ -52,17 +63,6 @@ public partial class StoragePage : ContentPage
         }
     }
 
-    public StoragePage(IStockService stockService)
-    {
-        InitializeComponent();
-        _stockService = stockService;
-        _allItems = _stockService.GetDefaultItems();
-        Stock = new ObservableCollection<Item>(_allItems);
-        FilteredStock = new ObservableCollection<Item>(_allItems);
-        SelectedStock = new ObservableCollection<Tuple<Item, bool>>();
-        BindingContext = this;
-    }
-
     private void OnDeleteItemClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.BindingContext is Item item)
@@ -75,6 +75,31 @@ public partial class StoragePage : ContentPage
             _selectedItem = null;
             OnPropertyChanged(nameof(FilteredStock));
         }
+    }
+
+    private async void OnAddToCartItems(object sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlert("Confirm", "Add selected items to shopping list ?", "Yes", "No");
+        if (confirm)
+        {
+             
+        }
+    }
+    private void OnDeleteItems(object sender, EventArgs e)
+    {
+        // Handle delete items logic
+        foreach (var item in SelectedStock)
+        {
+            if (item.Item2)
+            {
+                _stockService.DeleteItem(item.Item1.Id);
+                FilteredStock.Remove(item.Item1);
+                Stock.Remove(item.Item1);
+                _allItems.Remove(item.Item1);
+            }
+        }
+        SelectedStock.Clear();
+        OnPropertyChanged(nameof(FilteredStock));
     }
 
     private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
