@@ -14,5 +14,12 @@ namespace StockManager.Services
         List<Item> LoadShoppingListFromShoppingFile();
         void ClearItemsFromShopping();
         Item? GetItemFromShoppingListById(string Id);
+        List<Item> GetItemsFromStock();
+        void UpdateItemToStockList(Item item);
+        void DeleteItemFromStock(string errandId);
+        void AddItemToStockList(Item item);
+        string AddNewItemToStockList();
+        void ClearItemsFromStock();
+        Item? GetItemFromStockListById(string Id);
     }
 }

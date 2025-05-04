@@ -50,7 +50,7 @@ public partial class StoragePage : ContentPage
 
     private async void OnAddItem(object sender, EventArgs e)
     {
-        string id = _stockService.AddNewItemToShoppingList();
+        string id = _stockService.AddNewItemToStockList();
         Item? newItem = _stockService.GetItemFromShoppingListById(id);
         if (newItem != null)
         {
