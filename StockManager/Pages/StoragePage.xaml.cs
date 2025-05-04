@@ -51,7 +51,7 @@ public partial class StoragePage : ContentPage
     private async void OnAddItem(object sender, EventArgs e)
     {
         string id = _stockService.AddNewItemToStockList();
-        Item? newItem = _stockService.GetItemFromShoppingListById(id);
+        Item? newItem = _stockService.GetItemFromStockListById(id);
         if (newItem != null)
         {
             await Navigation.PushAsync(new EditItemInStock(_stockService, newItem));
@@ -68,7 +68,7 @@ public partial class StoragePage : ContentPage
         if (sender is Button button && button.BindingContext is Item item)
         {
             // Remove the item from the stock
-            _stockService.DeleteItemFromShopping(item.Id);
+            _stockService.DeleteItemFromStock(item.Id);
             FilteredStock.Remove(item);
             Stock.Remove(item);
             _allItems.Remove(item);
@@ -85,7 +85,7 @@ public partial class StoragePage : ContentPage
              foreach(var item in SelectedStock)
              {
                 item.Item1.InCart = true;
-                _stockService.AddItemToShoppingList(item.Item1);
+                _stockService.AddItemToStockList(item.Item1);
             }
 
             confirm = await DisplayAlert("Confirm", "Items added to shopping list. \n\n Go to shopping list ?", "Yes", "No");
@@ -102,7 +102,7 @@ public partial class StoragePage : ContentPage
         {
             if (item.Item2)
             {
-                _stockService.DeleteItemFromShopping(item.Item1.Id);
+                _stockService.DeleteItemFromStock(item.Item1.Id);
                 FilteredStock.Remove(item.Item1);
                 Stock.Remove(item.Item1);
                 _allItems.Remove(item.Item1);
@@ -211,7 +211,7 @@ public partial class StoragePage : ContentPage
             // Navigate to the edit page or perform edit logic
             await Navigation.PushAsync(new EditItemInStock(_stockService, item));
             FilteredStock.Clear();
-            FilteredStock = new ObservableCollection<Item>(_stockService.GetItemsFromShopping());
+            FilteredStock = new ObservableCollection<Item>(_stockService.GetItemsFromStock());
             OnPropertyChanged(nameof(FilteredStock));
         }
     }
