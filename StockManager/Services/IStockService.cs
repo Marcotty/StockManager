@@ -5,14 +5,14 @@ namespace StockManager.Services
     public interface IStockService : IDisposable
     {
         List<Item> GetDefaultItems();
-        List<Item> GetItems();
-        void UpdateItem(Item item);
-        void DeleteItem(string errandId);
-        void AddItem(Item item);
-        string AddNewItem();
-        void SaveListToFile();
-        List<Item> LoadListFromFile();
-        void ClearItems();
-        Item? GetItemById(string Id);
+        List<Item> GetItemsFromShopping();
+        void UpdateItemToShoppingList(Item item);
+        void DeleteItemFromShopping(string errandId);
+        void AddItemToShoppingList(Item item);
+        string AddNewItemToShoppingList();
+        void SaveShoppingListToShoppingFile();
+        List<Item> LoadShoppingListFromShoppingFile();
+        void ClearItemsFromShopping();
+        Item? GetItemFromShoppingListById(string Id);
     }
 }

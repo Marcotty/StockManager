@@ -25,7 +25,7 @@ public partial class ShoppingPage : ContentPage
         InitializeComponent();
         _stockService = stockService;
         //var shoppingPage = _stockService.GetDefaultItems();
-        var shoppingData = _stockService.LoadListFromFile();
+        var shoppingData = _stockService.LoadShoppingListFromShoppingFile();
         Items = [.. shoppingData];
         DeletedItems = [];
         IsReverseEnabled = false;
@@ -36,17 +36,17 @@ public partial class ShoppingPage : ContentPage
     {
         if (sender is Entry entry && entry.BindingContext is Item item)
         {
-            if (_stockService.GetItemById(item.Id) != null)
+            if (_stockService.GetItemFromShoppingListById(item.Id) != null)
             {
                 item.Name = e.NewTextValue;
-                _stockService.UpdateItem(item);
+                _stockService.UpdateItemToShoppingList(item);
             }
         }
     }
 
     private void OnLoadShoppingListClicked(object sender, EventArgs e)
     {
-        var items = _stockService.LoadListFromFile();
+        var items = _stockService.LoadShoppingListFromShoppingFile();
         Items.Clear();
         foreach (var item in items)
         {
@@ -67,7 +67,7 @@ public partial class ShoppingPage : ContentPage
             ExpirationDate = DateTime.Now,
             InCart = false
         });
-        _stockService.AddNewItem();
+        _stockService.AddNewItemToShoppingList();
         OnPropertyChanged(nameof(Items));
 
         // Set focus on the last added item
@@ -96,7 +96,7 @@ public partial class ShoppingPage : ContentPage
         if (item != null)
         {
             item.InCart = checkBox.IsChecked;
-            _stockService.UpdateItem(item);
+            _stockService.UpdateItemToShoppingList(item);
         }
     }
 
@@ -112,7 +112,7 @@ public partial class ShoppingPage : ContentPage
         {
             DeletedItems.Add(new Tuple<Item, int>(item, Items.IndexOf(item)));
             Items.Remove(item);
-            _stockService.DeleteItem(item.Id);
+            _stockService.DeleteItemFromShopping(item.Id);
             OnPropertyChanged(nameof(Items));
 
             IsReverseEnabled = DeletedItems.Count > 0;
@@ -126,7 +126,7 @@ public partial class ShoppingPage : ContentPage
             var lastDeletedItem = DeletedItems.Last();
             DeletedItems.Remove(lastDeletedItem);
             Items.Insert(lastDeletedItem.Item2, lastDeletedItem.Item1);
-            _stockService.AddItem(lastDeletedItem.Item1);
+            _stockService.AddItemToShoppingList(lastDeletedItem.Item1);
             OnPropertyChanged(nameof(Items));
 
             IsReverseEnabled = DeletedItems.Count > 0;
@@ -139,13 +139,13 @@ public partial class ShoppingPage : ContentPage
 
         try
         {
-            _stockService.ClearItems();
+            _stockService.ClearItemsFromShopping();
             foreach (Item item in Items)
             {
-                _stockService.AddItem(item);
+                _stockService.AddItemToShoppingList(item);
             }
             // Save the current state of items to the file
-            _stockService.SaveListToFile();
+            _stockService.SaveShoppingListToShoppingFile();
 
             // Log or perform any cleanup actions
             Console.WriteLine("ShoppingPage is exiting. State saved.");
@@ -163,7 +163,7 @@ public partial class ShoppingPage : ContentPage
         if (confirm)
         {
             Items.Clear();
-            _stockService.ClearItems();
+            _stockService.ClearItemsFromShopping();
         }
     }
 }

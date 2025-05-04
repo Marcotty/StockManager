@@ -9,17 +9,17 @@ namespace StockManager.Services
         private List<Item> _shoppingItems;
         public StockService() 
         {
-            _shoppingItems = LoadListFromFile();
+            _shoppingItems = LoadShoppingListFromShoppingFile();
         }
-        public void AddItem(Item item)
+        public void AddItemToShoppingList(Item item)
         {
             _shoppingItems.Add(item);
         }
 
-        public string AddNewItem()
+        public string AddNewItemToShoppingList()
         {
             string id = Guid.NewGuid().ToString();
-            AddItem(new Item
+            AddItemToShoppingList(new Item
             {
                 Id = id,
                 Name = string.Empty,
@@ -33,17 +33,17 @@ namespace StockManager.Services
             return id;
         }
 
-        public Item? GetItemById(string Id)
+        public Item? GetItemFromShoppingListById(string Id)
         {
             return _shoppingItems.FirstOrDefault(i => i.Id == Id);
         }
 
-        public void ClearItems()
+        public void ClearItemsFromShopping()
         {
             _shoppingItems.Clear();
         }
 
-        public void DeleteItem(string ItemId)
+        public void DeleteItemFromShopping(string ItemId)
         {
             var item = _shoppingItems.FirstOrDefault(i => i.Id == ItemId);
             if (item != null)
@@ -52,12 +52,12 @@ namespace StockManager.Services
             }
         }
 
-        public List<Item> GetItems()
+        public List<Item> GetItemsFromShopping()
         {
             return _shoppingItems;
         }
 
-        public List<Item> LoadListFromFile()
+        public List<Item> LoadShoppingListFromShoppingFile()
         {
             if (_shoppingItems != null)
                 return _shoppingItems;
@@ -117,7 +117,7 @@ namespace StockManager.Services
             return _shoppingItems ?? [];
         }
 
-        public void SaveListToFile()
+        public void SaveShoppingListToShoppingFile()
         {
             try
             {
@@ -151,7 +151,7 @@ namespace StockManager.Services
             }
         }
 
-        public void UpdateItem(Item newItem)
+        public void UpdateItemToShoppingList(Item newItem)
         {
             Item? item = _shoppingItems.FirstOrDefault(i => i.Id == newItem.Id);
             if (item == null)
@@ -200,7 +200,7 @@ namespace StockManager.Services
 
         public void Dispose()
         {
-            SaveListToFile();
+            SaveShoppingListToShoppingFile();
         }
     }
 }

@@ -22,14 +22,14 @@ namespace StockManager
             base.OnSleep();
             Console.WriteLine("App is sleeping. State saved.");
             // Save the shopping list to a file
-            _stockService?.SaveListToFile();
+            _stockService?.SaveShoppingListToShoppingFile();
         }
         protected override void OnStart()
         {
             base.OnStart();
             Console.WriteLine("App is starting.");
             // Load the shopping list from a file
-            _stockService?.LoadListFromFile();
+            _stockService?.LoadShoppingListFromShoppingFile();
         }
     }
 }

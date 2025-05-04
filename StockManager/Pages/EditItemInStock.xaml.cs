@@ -27,7 +27,7 @@ public partial class EditItemInStock : ContentPage
             DisplayAlert("Error", "Please enter a location for the item.", "OK");
             return;
         }
-        _stockService.UpdateItem(Item);
+        _stockService.UpdateItemToShoppingList(Item);
         Navigation.PopAsync();
     }
 
@@ -43,13 +43,13 @@ public partial class EditItemInStock : ContentPage
             DisplayAlert("Error", "Please enter a location for the item.", "OK");
             return;
         }
-        _stockService.UpdateItem(Item);
+        _stockService.UpdateItemToShoppingList(Item);
         Navigation.PopAsync();
     }
 
     private void OnDeleteClicked(object sender, EventArgs e)
     {
-        _stockService.DeleteItem(Item.Id);
+        _stockService.DeleteItemFromShopping(Item.Id);
         Navigation.PopAsync();
     }
 }
