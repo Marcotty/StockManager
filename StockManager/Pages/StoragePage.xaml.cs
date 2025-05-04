@@ -63,6 +63,20 @@ public partial class StoragePage : ContentPage
         BindingContext = this;
     }
 
+    private void OnDeleteItemClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is Item item)
+        {
+            // Remove the item from the stock
+            _stockService.DeleteItem(item.Id);
+            FilteredStock.Remove(item);
+            Stock.Remove(item);
+            _allItems.Remove(item);
+            _selectedItem = null;
+            OnPropertyChanged(nameof(FilteredStock));
+        }
+    }
+
     private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
     {
         // Pass the search query to the filtering method

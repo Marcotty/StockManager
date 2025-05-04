@@ -70,7 +70,10 @@
                                             <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
                                         </StackLayout>
                                     </Grid>
-                                    <Button x:Name="EditButton" HorizontalOptions="Center" Text="Edit" Clicked="OnEditClicked" />
+                                    <StackLayout Padding="20" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Button x:Name="EditButton" Grid.Column="1" Text="Edit" Clicked="OnEditClicked" />
+                                        <Button x:Name="DeleteItemButton" Grid.Column="3" Text="Delete" Clicked="OnDeleteItemClicked" />
+                                    </StackLayout>
                                 </VerticalStackLayout>
                             </Frame>
                         </VerticalStackLayout>
