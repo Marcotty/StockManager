@@ -5,15 +5,38 @@ namespace StockManager.Services
 {
     public class StockService : IStockService
     {
-        private List<Item>? _stockItems;
+        private List<Item> _stockItems;
         private List<Item> _shoppingItems;
         public StockService() 
         {
             _shoppingItems = LoadShoppingListFromShoppingFile();
+            _stockItems = GetDefaultItems();
         }
+        public void AddItemToStockList(Item item)
+        {
+            _stockItems.Add(item);
+        }
+
         public void AddItemToShoppingList(Item item)
         {
             _shoppingItems.Add(item);
+        }
+
+        public string AddNewItemToStockList()
+        {
+            string id = Guid.NewGuid().ToString();
+            AddItemToStockList(new Item
+            {
+                Id = id,
+                Name = string.Empty,
+                Description = string.Empty,
+                Quantity = 0,
+                Location = string.Empty,
+                ExpirationDate = DateTime.Now,
+                InCart = false,
+                InStock = false
+            });
+            return id;
         }
 
         public string AddNewItemToShoppingList()
@@ -38,9 +61,28 @@ namespace StockManager.Services
             return _shoppingItems.FirstOrDefault(i => i.Id == Id);
         }
 
+        public Item? GetItemFromStockListById(string Id)
+        {
+            return _stockItems.FirstOrDefault(i => i.Id == Id);
+        }
+
+        public void ClearItemsFromStock()
+        {
+            _stockItems.Clear();
+        }
+
         public void ClearItemsFromShopping()
         {
             _shoppingItems.Clear();
+        }
+
+        public void DeleteItemFromStock(string ItemId)
+        {
+            var item = _stockItems.FirstOrDefault(i => i.Id == ItemId);
+            if (item != null)
+            {
+                _stockItems.Remove(item);
+            }
         }
 
         public void DeleteItemFromShopping(string ItemId)
@@ -50,6 +92,11 @@ namespace StockManager.Services
             {
                 _shoppingItems.Remove(item);
             }
+        }
+
+        public List<Item> GetItemsFromStock()
+        {
+            return _stockItems;
         }
 
         public List<Item> GetItemsFromShopping()
@@ -148,6 +195,25 @@ namespace StockManager.Services
             catch (Exception ex)
             {
                 throw new Exception($"An error occurred while saving the stock: {ex.Message}");
+            }
+        }
+
+        public void UpdateItemToStockList(Item newItem)
+        {
+            Item? item = _stockItems.FirstOrDefault(i => i.Id == newItem.Id);
+            if (item == null)
+            {
+                newItem.Id = Guid.NewGuid().ToString();
+                _stockItems.Add(newItem);
+            }
+            else
+            {
+                item.Name = newItem.Name;
+                item.Description = newItem.Description;
+                item.Quantity = newItem.Quantity;
+                item.Location = newItem.Location;
+                item.ExpirationDate = newItem.ExpirationDate;
+                item.InCart = newItem.InCart;
             }
         }
 
