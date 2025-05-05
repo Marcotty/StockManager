@@ -67,7 +67,7 @@
                             </Grid>
 
                             <!-- Frame for tapped item -->
-                            <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="LightGray">
+                            <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
                                 <VerticalStackLayout>
                                     <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                                         <VerticalStackLayout Padding="20" Grid.Column="1" VerticalOptions="Center">
@@ -82,9 +82,9 @@
                                             <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
                                         </StackLayout>
                                     </Grid>
-                                    <StackLayout Padding="20" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-                                        <Button x:Name="EditButton" Grid.Column="1" Text="Edit" Clicked="OnEditClicked" />
-                                        <Button x:Name="DeleteItemButton" Grid.Column="3" Text="Delete" Clicked="OnDeleteItemClicked" />
+                                    <StackLayout Padding="20" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Button x:Name="EditButton" Margin="20" Grid.Column="1" Text="Edit" Clicked="OnEditClicked" />
+                                        <Button x:Name="DeleteItemButton" Margin="20" Grid.Column="3" Text="Delete" Clicked="OnDeleteItemClicked" />
                                     </StackLayout>
                                 </VerticalStackLayout>
                             </Frame>
