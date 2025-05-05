@@ -41,13 +41,25 @@ public partial class StoragePage : ContentPage
     {
         InitializeComponent();
         _stockService = stockService;
-        _allItems = _stockService.GetDefaultItems();
+        _allItems = _stockService.GetItemsFromStock();
         Stock = new ObservableCollection<Item>(_allItems);
         FilteredStock = new ObservableCollection<Item>(_allItems);
         SelectedStock = new ObservableCollection<Tuple<Item, bool>>();
         IsFrameVisible = false;
         IsPanelEnabled = false;
         BindingContext = this;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        // Load the stock data when the page appears
+        FilteredStock.Clear();
+        foreach (var item in _stockService.GetItemsFromStock())
+        {
+            FilteredStock.Add(item);
+        }
+        OnPropertyChanged(nameof(FilteredStock));
     }
 
     private async void OnAddItem(object sender, EventArgs e)
