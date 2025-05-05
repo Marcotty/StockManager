@@ -19,7 +19,8 @@ namespace StockManager.Services
 
         public void AddItemToShoppingList(Item item)
         {
-            _shoppingItems.Add(item);
+            if(!_shoppingItems.Contains(item))
+                _shoppingItems.Add(item);
         }
 
         public string AddNewItemToStockList()
