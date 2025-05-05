@@ -23,6 +23,22 @@ namespace StockManager.Services
                 _shoppingItems.Add(item);
         }
 
+        public void AddNewItemToStockListFromShoppingCart(string name)
+        {
+            string id = Guid.NewGuid().ToString();
+            AddItemToStockList(new Item
+            {
+                Id = id,
+                Name = name,
+                Description = string.Empty,
+                Quantity = 1,
+                Location = string.Empty,
+                ExpirationDate = DateTime.Now,
+                InCart = false,
+                InStock = true
+            });
+        }
+
         public string AddNewItemToStockList()
         {
             string id = Guid.NewGuid().ToString();

@@ -81,6 +81,18 @@ public partial class ShoppingPage : ContentPage
         {
             Items.Remove(item);
             //update quantity on stockList
+            var stockItem = _stockService.GetItemFromStockListById(item.Id);
+            if (stockItem != null)
+            {
+                stockItem.Quantity += 1; //item.Quantity; Todo : refactor quantity UI
+                stockItem.InCart = false;
+                stockItem.InStock = true;
+                _stockService.UpdateItemToStockList(stockItem);
+            }
+            else
+            {
+                _stockService.AddNewItemToStockListFromShoppingCart(item.Name);
+            }
         }
         OnPropertyChanged(nameof(Items));
     }

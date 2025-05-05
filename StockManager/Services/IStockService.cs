@@ -21,5 +21,6 @@ namespace StockManager.Services
         string AddNewItemToStockList();
         void ClearItemsFromStock();
         Item? GetItemFromStockListById(string Id);
+        void AddNewItemToStockListFromShoppingCart(string name);
     }
 }
