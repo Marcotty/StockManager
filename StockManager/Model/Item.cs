@@ -17,7 +17,7 @@ namespace StockManager.Model
         public DateTime ExpirationDate { get; set; }
         public bool InCart { get; set; }
         public bool InStock { get; set; }
-        private bool _isSelected ;
+        public bool IsSelected { get; set; }
         private bool _showPanel;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -29,16 +29,6 @@ namespace StockManager.Model
             {
                 _showPanel = value;
                 OnPropertyChanged(nameof(ShowPanel));
-            }
-        }
-
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set
-            {
-                _isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
             }
         }
 
