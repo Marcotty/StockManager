@@ -24,7 +24,6 @@ public partial class ShoppingPage : ContentPage
     {
         InitializeComponent();
         _stockService = stockService;
-        //var shoppingPage = _stockService.GetDefaultItems();
         var shoppingData = _stockService.LoadShoppingListFromShoppingFile();
         Items = [.. shoppingData];
         DeletedItems = [];
@@ -65,7 +64,8 @@ public partial class ShoppingPage : ContentPage
             Quantity = 0,
             Location = string.Empty,
             ExpirationDate = DateTime.Now,
-            InCart = false
+            InCart = true,
+            InStock = false,
         });
         _stockService.AddNewItemToShoppingList();
         OnPropertyChanged(nameof(Items));
@@ -76,10 +76,11 @@ public partial class ShoppingPage : ContentPage
 
     private void OnValidateClicked(object sender, EventArgs e)
     {
-        var itemsToRemove = Items.Where(item => item.InCart).ToList();
+        var itemsToRemove = Items.Where(item => item.IsSelected).ToList();
         foreach (var item in itemsToRemove)
         {
             Items.Remove(item);
+            //update quantity on stockList
         }
         OnPropertyChanged(nameof(Items));
     }
@@ -95,7 +96,7 @@ public partial class ShoppingPage : ContentPage
         var item = entry?.BindingContext as Item;
         if (item != null)
         {
-            item.InCart = checkBox.IsChecked;
+            item.IsSelected = checkBox.IsChecked;
             _stockService.UpdateItemToShoppingList(item);
         }
     }

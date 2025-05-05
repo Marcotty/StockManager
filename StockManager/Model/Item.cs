@@ -18,8 +18,19 @@ namespace StockManager.Model
         public bool InCart { get; set; }
         public bool InStock { get; set; }
         private bool _isSelected ;
+        private bool _showPanel;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public bool ShowPanel
+        {
+            get => _showPanel;
+            set
+            {
+                _showPanel = value;
+                OnPropertyChanged(nameof(ShowPanel));
+            }
+        }
 
         public bool IsSelected
         {

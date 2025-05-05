@@ -140,7 +140,8 @@ namespace StockManager.Services
                         var quantity = int.Parse(lines[3].Replace("Quantity: ", "").Trim());
                         var location = lines[4].Replace("Location: ", "").Trim();
                         var expirationDate = DateTime.Parse(lines[5].Replace("Expiration Date: ", "").Trim());
-                        var inStock = bool.Parse(lines[6].Replace("In Stock: ", "").Trim());
+                        var inCart = bool.Parse(lines[6].Replace("In Cart: ", "").Trim());
+                        var inStock = bool.Parse(lines[7].Replace("In Stock: ", "").Trim());
 
                         var item = new Item
                         {
@@ -150,7 +151,8 @@ namespace StockManager.Services
                             Quantity = quantity,
                             Location = location,
                             ExpirationDate = expirationDate,
-                            InCart = false,
+                            InCart = inCart,
+                            InStock = inStock
                         };
                         _shoppingItems ??= [];
                         _shoppingItems.Add(item);
@@ -185,6 +187,7 @@ namespace StockManager.Services
                         stringBuilder.AppendLine($"Quantity: {item.Quantity}");
                         stringBuilder.AppendLine($"Location: {item.Location}");
                         stringBuilder.AppendLine($"Expiration Date: {item.ExpirationDate.ToShortDateString()}");
+                        stringBuilder.AppendLine($"In Cart: {item.InCart}");
                         stringBuilder.AppendLine($"In Stock: {item.InStock}");
                         stringBuilder.AppendLine(new string('-', 20));
                     }
@@ -214,6 +217,7 @@ namespace StockManager.Services
                 item.Location = newItem.Location;
                 item.ExpirationDate = newItem.ExpirationDate;
                 item.InCart = newItem.InCart;
+                item.InStock = newItem.InStock;
             }
         }
 
@@ -233,12 +237,13 @@ namespace StockManager.Services
                 item.Location = newItem.Location;
                 item.ExpirationDate = newItem.ExpirationDate;
                 item.InCart = newItem.InCart;
+                item.InStock = newItem.InStock;
             }
         }
 
         public List<Item> GetDefaultItems()
         {
-            _shoppingItems = new List<Item>
+            return new List<Item>
            {
                new Item(Guid.NewGuid().ToString(), "Apples", "Red apples, 1 kg", 10, "Supermarket A", DateTime.Now.AddDays(7), true, false),
                new Item(Guid.NewGuid().ToString(), "Milk", "2 liters of whole milk", 5, "Supermarket B", DateTime.Now.AddDays(5), false, false),
@@ -261,7 +266,6 @@ namespace StockManager.Services
                new Item(Guid.NewGuid().ToString(), "Juice", "Orange juice, 1 liter", 6, "Supermarket P", DateTime.Now.AddDays(7), true, false),
                new Item(Guid.NewGuid().ToString(), "Coffee", "Ground coffee, 250 g", 2, "Supermarket Q", DateTime.Now.AddMonths(12), false, false)
            };
-            return _shoppingItems;
         }
 
         public void Dispose()

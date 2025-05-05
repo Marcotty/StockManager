@@ -46,8 +46,7 @@
             </Picker>
             <CollectionView x:Name="collectionView" 
                             ItemsSource="{Binding FilteredStock}" 
-                            SelectionMode="None" 
-                            SelectionChanged="OnItemTapped">
+                            SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Item">
                         <VerticalStackLayout>
@@ -56,7 +55,7 @@
                             </VerticalStackLayout.GestureRecognizers>
                             <!-- Item Content -->
                             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                                <CheckBox Grid.Column="0" x:Name="selectCheckBox" IsChecked="False" CheckedChanged="SelectCheckBoxChanged" VerticalOptions="Center" />
+                                <CheckBox Grid.Column="0" x:Name="selectCheckBox" IsChecked="{Binding IsSelected}" CheckedChanged="SelectCheckBoxChanged" VerticalOptions="Center" />
                                 <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
                                     <Label Text="{Binding Name}" VerticalOptions="Center"/>
                                     <Label Text="{Binding Description}" VerticalOptions="Center"/>
@@ -68,7 +67,7 @@
                             </Grid>
 
                             <!-- Frame for tapped item -->
-                            <Frame x:Name="DetailsFrame" IsVisible="{Binding IsSelected}" Padding="10" BackgroundColor="LightGray">
+                            <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="LightGray">
                                 <VerticalStackLayout>
                                     <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                                         <VerticalStackLayout Padding="20" Grid.Column="1" VerticalOptions="Center">

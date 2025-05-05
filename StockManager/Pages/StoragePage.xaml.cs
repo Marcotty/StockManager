@@ -45,6 +45,8 @@ public partial class StoragePage : ContentPage
         Stock = new ObservableCollection<Item>(_allItems);
         FilteredStock = new ObservableCollection<Item>(_allItems);
         SelectedStock = new ObservableCollection<Tuple<Item, bool>>();
+        IsFrameVisible = false;
+        IsPanelEnabled = false;
         BindingContext = this;
     }
 
@@ -82,10 +84,14 @@ public partial class StoragePage : ContentPage
         bool confirm = await DisplayAlert("Confirm", "Add selected items to shopping list ?", "Yes", "No");
         if (confirm)
         {
-             foreach(var item in SelectedStock)
-             {
-                item.Item1.InCart = true;
-                _stockService.AddItemToStockList(item.Item1);
+            foreach (var item in SelectedStock)
+            {
+                if (item.Item2)
+                {
+                    item.Item1.IsSelected = false;
+                    item.Item1.InCart = true;
+                    _stockService.AddItemToShoppingList(item.Item1);
+                }
             }
 
             confirm = await DisplayAlert("Confirm", "Items added to shopping list. \n\n Go to shopping list ?", "Yes", "No");
@@ -166,41 +172,39 @@ public partial class StoragePage : ContentPage
 
     private async void OnItemTapped(Item selectedItem)
     {
-        // Handle tapped item logic
-        selectedItem.IsSelected = !selectedItem.IsSelected;
-        foreach (var item in FilteredStock)
-        {
-            if (item != selectedItem)
-            {
-                item.IsSelected = false;
-            }
-        }
+        selectedItem.ShowPanel = !selectedItem.ShowPanel;
         // Animate the panel visibility
         var frame = FindFrameForItem(selectedItem); // Helper method to locate the Frame
         if (frame != null)
         {
-            if (selectedItem.IsSelected)
+            if (selectedItem.ShowPanel)
             {
                 // Animate showing the panel
                 frame.Opacity = 0;
                 frame.IsVisible = true;
                 await frame.FadeTo(1, 250); // Fade in over 250ms
-                await frame.TranslateTo(0, 0, 250, Easing.CubicOut); // Slide in
+                await frame.TranslateTo(0, 0, 250, Easing.SinOut); // Slide in
             }
             else
             {
                 // Animate hiding the panel
-                await frame.FadeTo(0, 250); // Fade out over 250ms
-                await frame.TranslateTo(0, 20, 250, Easing.CubicIn); // Slide out
+                await frame.FadeTo(0, 200); // Fade out over 200ms
+                await frame.TranslateTo(0, 20, 250, Easing.SinOut); // Slide out
                 frame.IsVisible = false;
             }
         }
-
-        var collectionView = this.FindByName<CollectionView>("collectionView");
-        if (collectionView != null)
+        /* // Hide other panels
+        foreach (var item in FilteredStock)
         {
-            collectionView.SelectedItem = null;
-        }
+            if (item != selectedItem)
+            {
+                item.ShowPanel = false;
+                frame = FindFrameForItem(selectedItem);
+                await frame.FadeTo(0, 200); // Fade out over 200ms
+                await frame.TranslateTo(0, 20, 250, Easing.SinOut); // Slide out
+                frame.IsVisible = false;
+            }
+        }*/
     }
 
     private async void OnEditClicked(object sender, EventArgs e)
@@ -213,47 +217,6 @@ public partial class StoragePage : ContentPage
             FilteredStock.Clear();
             FilteredStock = new ObservableCollection<Item>(_stockService.GetItemsFromStock());
             OnPropertyChanged(nameof(FilteredStock));
-        }
-    }
-
-    private async void OnItemTapped(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is VisualElement element && element.BindingContext is Item selectedItem)
-        {
-            // Toggle the IsSelected property of the tapped item
-            selectedItem.IsSelected = !selectedItem.IsSelected;
-
-            // Deselect all other items
-            foreach (var item in FilteredStock)
-            {
-                if (item != selectedItem)
-                {
-                    item.IsSelected = false;
-                }
-            }
-
-            // Animate the panel visibility
-            var frame = FindFrameForItem(selectedItem); // Helper method to locate the Frame
-            if (frame != null)
-            {
-                if (selectedItem.IsSelected)
-                {
-                    // Animate showing the panel
-                    frame.Opacity = 0;
-                    frame.IsVisible = true;
-                    await frame.FadeTo(1, 250); // Fade in over 250ms
-                    await frame.TranslateTo(0, 0, 250, Easing.CubicOut); // Slide in
-                }
-                else
-                {
-                    // Animate hiding the panel
-                    await frame.FadeTo(0, 250); // Fade out over 250ms
-                    await frame.TranslateTo(0, 20, 250, Easing.CubicIn); // Slide out
-                    frame.IsVisible = false;
-                }
-            }
-
-            ((CollectionView)sender).SelectedItem = null;
         }
     }
 
@@ -298,7 +261,22 @@ public partial class StoragePage : ContentPage
     }
 
     private void SelectCheckBoxChanged(object sender, EventArgs e)
-    { 
-
+    {
+        if (sender is CheckBox checkBox && checkBox.BindingContext is Item item)
+        {
+            // Add or remove the item from the SelectedStock collection
+            if (item.IsSelected)
+            {
+                SelectedStock.Add(new Tuple<Item, bool>(item, true));
+            }
+            else
+            {
+                var selectedItem = SelectedStock.FirstOrDefault(i => i.Item1.Id == item.Id);
+                if (selectedItem != null)
+                {
+                    SelectedStock.Remove(selectedItem);
+                }
+            }
+        }
     }
 }

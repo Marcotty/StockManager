@@ -41,7 +41,7 @@
                    <DataTemplate x:DataType="models:Item">  
                        <ViewCell>  
                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">  
-                               <CheckBox Grid.Column="0" IsChecked="{Binding InStock}" VerticalOptions="Center" CheckedChanged="OnCheckBoxChanged" />  
+                               <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}" VerticalOptions="Center" CheckedChanged="OnCheckBoxChanged" />  
                                <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
                                     <Entry Text="{Binding Name}" VerticalOptions="Center" TextChanged = "OnEntryTextChanged"/>  
                                </StackLayout>  
