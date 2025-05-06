@@ -1,5 +1,6 @@
 using StockManager.Model;
 using StockManager.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace StockManager.Pages;
@@ -24,7 +25,7 @@ public partial class ShoppingPage : ContentPage
     {
         InitializeComponent();
         _stockService = stockService;
-        var shoppingData = _stockService.LoadShoppingListFromShoppingFile();
+        var shoppingData = _stockService.GetItemsFromShopping();
         Items = [.. shoppingData];
         DeletedItems = [];
         IsReverseEnabled = false;
@@ -45,11 +46,12 @@ public partial class ShoppingPage : ContentPage
 
     private void OnLoadShoppingListClicked(object sender, EventArgs e)
     {
-        var items = _stockService.LoadShoppingListFromShoppingFile();
+        var items = _stockService.LoadStockListFromStockFile();
         Items.Clear();
         foreach (var item in items)
         {
-            Items.Add(item);
+            if (item.InCart)
+                Items.Add(item);
         }
         OnPropertyChanged(nameof(Items));
     }
@@ -83,6 +85,7 @@ public partial class ShoppingPage : ContentPage
             item.Quantity += 1; //item.Quantity; Todo : refactor quantity UI
             item.InCart = false;
             item.InStock = true;
+            item.IsSelected = false;
             _stockService.UpdateItemToStockList(item);
         }
         OnPropertyChanged(nameof(Items));
@@ -155,9 +158,10 @@ public partial class ShoppingPage : ContentPage
             foreach (Item item in Items)
             {
                 _stockService.AddItemToShoppingList(item);
+                _stockService.UpdateItemToStockList(item);
             }
             // Save the current state of items to the file
-            _stockService.SaveShoppingListToShoppingFile();
+            //_stockService.SaveShoppingListToStockFile();
 
             // Log or perform any cleanup actions
             Console.WriteLine("ShoppingPage is exiting. State saved.");

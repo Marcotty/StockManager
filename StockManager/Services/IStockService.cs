@@ -10,8 +10,6 @@ namespace StockManager.Services
         void DeleteItemFromShopping(string errandId);
         void AddItemToShoppingList(Item item);
         string AddNewItemToShoppingList();
-        void SaveShoppingListToShoppingFile();
-        List<Item> LoadShoppingListFromShoppingFile();
         void ClearItemsFromShopping();
         Item? GetItemFromShoppingListById(string Id);
         List<Item> GetItemsFromStock();
@@ -21,5 +19,7 @@ namespace StockManager.Services
         string AddNewItemToStockList();
         void ClearItemsFromStock();
         Item? GetItemFromStockListById(string Id);
+        void SaveStockListToStockFile();
+        List<Item> LoadStockListFromStockFile();
     }
 }

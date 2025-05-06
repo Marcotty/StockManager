@@ -1,4 +1,5 @@
 ﻿using StockManager.Model;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace StockManager.Services
@@ -9,8 +10,16 @@ namespace StockManager.Services
         private List<Item> _shoppingItems;
         public StockService() 
         {
-            _shoppingItems = LoadShoppingListFromShoppingFile();
-            _stockItems = GetDefaultItems();
+            _stockItems = LoadStockListFromStockFile();
+            var list = new ObservableCollection<Item>();
+            foreach (var item in _stockItems)
+            {
+                if(item.InCart)
+                {
+                    list.Add(item);
+                }
+            }
+            _shoppingItems = [.. list];
         }
         public void AddItemToStockList(Item item)
         {
@@ -105,103 +114,6 @@ namespace StockManager.Services
             return _shoppingItems;
         }
 
-        public List<Item> LoadShoppingListFromShoppingFile()
-        {
-            if (_shoppingItems != null)
-                return _shoppingItems;
-            try
-            {
-                // Define the file path to load the list
-                var filePath = Path.Combine(FileSystem.AppDataDirectory, "Stock.txt");
-
-                // Check if the file exists
-                if (!File.Exists(filePath))
-                {
-                    if (!File.Exists(filePath))
-                    {
-                        File.Create(filePath).Close();
-                        _shoppingItems ??= [];
-                    }
-                }
-                else
-                {
-                    // Read the file content
-                    var fileContent = File.ReadAllText(filePath);
-
-                    // Parse the file content and populate the errands list
-                    var itemsData = fileContent.Split(new[] { new string('-', 20) }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (var errandData in itemsData)
-                    {
-                        var lines = errandData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                        if (lines.Length < 4) continue;
-
-                        var id = lines[0].Replace("Id: ", "").Trim();
-                        var name = lines[1].Replace("Name: ", "").Trim();
-                        var description = lines[2].Replace("Description: ", "").Trim();
-                        var quantity = int.Parse(lines[3].Replace("Quantity: ", "").Trim());
-                        var location = lines[4].Replace("Location: ", "").Trim();
-                        var expirationDate = DateTime.Parse(lines[5].Replace("Expiration Date: ", "").Trim());
-                        var inCart = bool.Parse(lines[6].Replace("In Cart: ", "").Trim());
-                        var inStock = bool.Parse(lines[7].Replace("In Stock: ", "").Trim());
-
-                        var item = new Item
-                        {
-                            Id = id,
-                            Name = name,
-                            Description = description,
-                            Quantity = quantity,
-                            Location = location,
-                            ExpirationDate = expirationDate,
-                            InCart = inCart,
-                            InStock = inStock
-                        };
-                        _shoppingItems ??= [];
-                        _shoppingItems.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"An error occurred while loading the stock: {ex.Message}");
-            }
-            return _shoppingItems ?? [];
-        }
-
-        public void SaveShoppingListToShoppingFile()
-        {
-            try
-            {
-                var filePath = Path.Combine(FileSystem.AppDataDirectory, "Stock.txt");
-
-                if (!File.Exists(filePath))
-                {
-                    File.Create(filePath).Dispose();
-                }
-                var stringBuilder = new StringBuilder();
-                foreach (var item in _shoppingItems)
-                {
-                    if (item.Name != string.Empty)
-                    {
-                        stringBuilder.AppendLine($"Id: {item.Id}");
-                        stringBuilder.AppendLine($"Name: {item.Name}");
-                        stringBuilder.AppendLine($"Description: {item.Description}");
-                        stringBuilder.AppendLine($"Quantity: {item.Quantity}");
-                        stringBuilder.AppendLine($"Location: {item.Location}");
-                        stringBuilder.AppendLine($"Expiration Date: {item.ExpirationDate.ToShortDateString()}");
-                        stringBuilder.AppendLine($"In Cart: {item.InCart}");
-                        stringBuilder.AppendLine($"In Stock: {item.InStock}");
-                        stringBuilder.AppendLine(new string('-', 20));
-                    }
-                }
-
-                File.WriteAllText(filePath, stringBuilder.ToString());
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"An error occurred while saving the stock: {ex.Message}");
-            }
-        }
-
         public void UpdateItemToStockList(Item newItem)
         {
             Item? item = _stockItems.FirstOrDefault(i => i.Id == newItem.Id);
@@ -242,6 +154,103 @@ namespace StockManager.Services
             }
         }
 
+        public List<Item> LoadStockListFromStockFile()
+        {
+            if (_stockItems != null)
+                return _stockItems;
+            try
+            {
+                // Define the file path to load the list
+                var filePath = Path.Combine(FileSystem.AppDataDirectory, "stock_data.txt");
+
+                // Check if the file exists
+                if (!File.Exists(filePath))
+                {
+                    if (!File.Exists(filePath))
+                    {
+                        File.Create(filePath).Close();
+                        _stockItems ??= [];
+                    }
+                }
+                else
+                {
+                    // Read the file content
+                    var fileContent = File.ReadAllText(filePath);
+
+                    // Parse the file content and populate the errands list
+                    var itemsData = fileContent.Split(new[] { new string('-', 20) }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var errandData in itemsData)
+                    {
+                        var lines = errandData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                        if (lines.Length < 4) continue;
+
+                        var id = lines[0].Replace("Id: ", "").Trim();
+                        var name = lines[1].Replace("Name: ", "").Trim();
+                        var description = lines[2].Replace("Description: ", "").Trim();
+                        var quantity = int.Parse(lines[3].Replace("Quantity: ", "").Trim());
+                        var location = lines[4].Replace("Location: ", "").Trim();
+                        var expirationDate = DateTime.Parse(lines[5].Replace("Expiration Date: ", "").Trim());
+                        var inCart = bool.Parse(lines[6].Replace("In Cart: ", "").Trim());
+                        var inStock = bool.Parse(lines[7].Replace("In Stock: ", "").Trim());
+
+                        var item = new Item
+                        {
+                            Id = id,
+                            Name = name,
+                            Description = description,
+                            Quantity = quantity,
+                            Location = location,
+                            ExpirationDate = expirationDate,
+                            InCart = inCart,
+                            InStock = inStock
+                        };
+                        _stockItems ??= [];
+                        _stockItems.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"An error occurred while loading the stock: {ex.Message}");
+            }
+            return _stockItems ?? [];
+        }
+
+        public void SaveStockListToStockFile()
+        {
+            try
+            {
+                var filePath = Path.Combine(FileSystem.AppDataDirectory, "stock_data.txt");
+
+                if (!File.Exists(filePath))
+                {
+                    File.Create(filePath).Dispose();
+                }
+                var stringBuilder = new StringBuilder();
+                foreach (var item in _stockItems)
+                {
+                    if (item.Name != string.Empty)
+                    {
+                        stringBuilder.AppendLine($"Id: {item.Id}");
+                        stringBuilder.AppendLine($"Name: {item.Name}");
+                        stringBuilder.AppendLine($"Description: {item.Description}");
+                        stringBuilder.AppendLine($"Quantity: {item.Quantity}");
+                        stringBuilder.AppendLine($"Location: {item.Location}");
+                        stringBuilder.AppendLine($"Expiration Date: {item.ExpirationDate.ToShortDateString()}");
+                        stringBuilder.AppendLine($"In Cart: {item.InCart}");
+                        stringBuilder.AppendLine($"In Stock: {item.InStock}");
+                        stringBuilder.AppendLine(new string('-', 20));
+                    }
+                }
+
+                File.WriteAllText(filePath, stringBuilder.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"An error occurred while saving the stock: {ex.Message}");
+            }
+        }
+
         public List<Item> GetDefaultItems()
         {
             return new List<Item>
@@ -271,7 +280,7 @@ namespace StockManager.Services
 
         public void Dispose()
         {
-            SaveShoppingListToShoppingFile();
+            SaveStockListToStockFile();
         }
     }
 }

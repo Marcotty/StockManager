@@ -50,6 +50,13 @@ public partial class StoragePage : ContentPage
         BindingContext = this;
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        // Save the stock data when the page disappears
+        _stockService.SaveStockListToStockFile();
+    }
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
