@@ -137,6 +137,14 @@ public partial class ShoppingPage : ContentPage
         }
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Items.Clear();
+        Items = new ObservableCollection<Item>(_stockService.GetItemsFromShopping());
+        OnPropertyChanged(nameof(Items));
+    }
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
