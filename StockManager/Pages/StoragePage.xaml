@@ -32,66 +32,77 @@
             Priority="0"   
             Clicked="OnAddItem" />
     </ContentPage.ToolbarItems>
-    <ScrollView>  
-        <VerticalStackLayout>  
-            <SearchBar Placeholder="Search items"  
+    <Grid x:Name="MainGrid" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ScrollView Grid.ColumnSpan="2">
+            <VerticalStackLayout>
+                <SearchBar Placeholder="Search items"  
                        TextChanged="OnSearchBarTextChanged" />
-            <Picker Title="Sort By"
-                    SelectedIndexChanged="OnSortCriteriaChanged">
-                <Picker.Items>
-                    <x:String>Name</x:String>
-                    <x:String>Quantity</x:String>
-                    <x:String>Expiration Date</x:String>
-                </Picker.Items>
-            </Picker>
-            <CollectionView x:Name="collectionView" 
+                <CollectionView x:Name="collectionView" 
                             ItemsSource="{Binding FilteredStock}" 
                             SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Item">
-                        <VerticalStackLayout>
-                            <VerticalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:StoragePage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
-                            </VerticalStackLayout.GestureRecognizers>
-                            <!-- Item Content -->
-                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                                <CheckBox Grid.Column="0" x:Name="selectCheckBox" IsChecked="{Binding IsSelected}" CheckedChanged="SelectCheckBoxChanged" VerticalOptions="Center" />
-                                <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{Binding Name}" VerticalOptions="Center"/>
-                                    <Label Text="{Binding Description}" VerticalOptions="Center"/>
-                                </VerticalStackLayout>
-                                <StackLayout Padding="10" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
-                                    <Label Text="{Binding Quantity}" VerticalOptions="Center"/>
-                                    <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
-                                </StackLayout>
-                            </Grid>
-
-                            <!-- Frame for tapped item -->
-                            <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
-                                <VerticalStackLayout>
-                                    <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                                        <VerticalStackLayout Padding="20" Grid.Column="1" VerticalOptions="Center">
-                                            <Label Grid.Column="2" Padding="8" Text="Details:" FontAttributes="Bold" />
-                                            <Label Text="{Binding Name, StringFormat='Name: {0}'}" />
-                                            <Label Text="{Binding Description, StringFormat='Description: {0}'}" />
-                                            <Label Text="{Binding Location, StringFormat='Location: {0}'}" />
-
-                                        </VerticalStackLayout>
-                                        <StackLayout Padding="20" Grid.Column="3" Orientation="Vertical" VerticalOptions="Center">
-                                            <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
-                                            <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                                        </StackLayout>
-                                    </Grid>
-                                    <StackLayout Padding="20" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                                        <Button x:Name="EditButton" Margin="20" Grid.Column="1" Text="Edit" Clicked="OnEditClicked" />
-                                        <Button x:Name="DeleteItemButton" Margin="20" Grid.Column="3" Text="Delete" Clicked="OnDeleteItemClicked" />
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Item">
+                            <VerticalStackLayout>
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:StoragePage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
+                                </VerticalStackLayout.GestureRecognizers>
+                                <!-- Item Content -->
+                                <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                                    <CheckBox Grid.Column="0" x:Name="selectCheckBox" IsChecked="{Binding IsSelected}" CheckedChanged="SelectCheckBoxChanged" VerticalOptions="Center" />
+                                    <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Description}" VerticalOptions="Center"/>
+                                    </VerticalStackLayout>
+                                    <StackLayout Padding="10" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
+                                        <Label Text="{Binding Quantity}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
                                     </StackLayout>
-                                </VerticalStackLayout>
-                            </Frame>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>  
-    </ScrollView>  
+                                </Grid>
+
+                                <!-- Frame for tapped item -->
+                                <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
+                                    <VerticalStackLayout>
+                                        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                                            <VerticalStackLayout Padding="20" Grid.Column="1" VerticalOptions="Center">
+                                                <Label Grid.Column="2" Padding="8" Text="Details:" FontAttributes="Bold" />
+                                                <Label Text="{Binding Name, StringFormat='Name: {0}'}" />
+                                                <Label Text="{Binding Description, StringFormat='Description: {0}'}" />
+                                                <Label Text="{Binding Location, StringFormat='Location: {0}'}" />
+
+                                            </VerticalStackLayout>
+                                            <StackLayout Padding="20" Grid.Column="3" Orientation="Vertical" VerticalOptions="Center">
+                                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
+                                                <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                            </StackLayout>
+                                        </Grid>
+                                        <StackLayout Padding="20" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <Button x:Name="EditButton" Margin="20" Grid.Column="1" Text="Edit" Clicked="OnEditClicked" />
+                                            <Button x:Name="DeleteItemButton" Margin="20" Grid.Column="3" Text="Delete" Clicked="OnDeleteItemClicked" />
+                                        </StackLayout>
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Picker Grid.ColumnSpan="2" Grid.Row="1" Title="Sort By" HorizontalOptions="Center"
+    SelectedIndexChanged="OnSortCriteriaChanged">
+            <Picker.Items>
+                <x:String>Name</x:String>
+                <x:String>Quantity</x:String>
+                <x:String>Expiration Date</x:String>
+                <x:String>Reset</x:String>
+            </Picker.Items>
+        </Picker>
+    </Grid>
 </ContentPage>
