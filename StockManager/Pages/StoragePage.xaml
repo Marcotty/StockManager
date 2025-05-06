@@ -61,8 +61,8 @@
                                         <Label Text="{Binding Name}" VerticalOptions="Center"/>
                                         <Label Text="{Binding Description}" VerticalOptions="Center"/>
                                     </VerticalStackLayout>
-                                    <StackLayout Padding="10" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
-                                        <Label Text="{Binding Quantity}" VerticalOptions="Center"/>
+                                    <StackLayout Padding="15" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
+                                        <Label Text="{Binding Quantity, StringFormat='{0} item(s)'}" VerticalOptions="Center"/>
                                         <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
                                     </StackLayout>
                                 </Grid>
@@ -71,21 +71,21 @@
                                 <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
                                     <VerticalStackLayout>
                                         <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                                            <VerticalStackLayout Padding="20" Grid.Column="1" VerticalOptions="Center">
-                                                <Label Grid.Column="2" Padding="8" Text="Details:" FontAttributes="Bold" />
-                                                <Label Text="{Binding Name, StringFormat='Name: {0}'}" />
-                                                <Label Text="{Binding Description, StringFormat='Description: {0}'}" />
-                                                <Label Text="{Binding Location, StringFormat='Location: {0}'}" />
+                                            <VerticalStackLayout Padding="20" Grid.Column="0" VerticalOptions="Center">
+                                                <Label Grid.Row="0" Padding="8" Text="Details:" FontAttributes="Bold" />
+                                                <Label Grid.Row="1" Text="{Binding Name, StringFormat='Name: {0}'}" />
+                                                <Label Grid.Row="2" Text="{Binding Description, StringFormat='Description: {0}'}" />
+                                                <Label Grid.Row="3" Text="{Binding Location, StringFormat='Location: {0}'}" />
 
                                             </VerticalStackLayout>
-                                            <StackLayout Padding="20" Grid.Column="3" Orientation="Vertical" VerticalOptions="Center">
-                                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
-                                                <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                            <StackLayout Padding="20" Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+                                                <Label Grid.Row="1" Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
+                                                <Label Grid.Row="2" Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
                                             </StackLayout>
                                         </Grid>
                                         <StackLayout Padding="20" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                                             <Button x:Name="EditButton" Margin="20" Grid.Column="1" Text="Edit" Clicked="OnEditClicked" />
-                                            <Button x:Name="DeleteItemButton" Margin="20" Grid.Column="3" Text="Delete" Clicked="OnDeleteItemClicked" />
+                                            <Button x:Name="DeleteItemButton" Margin="20" Grid.Column="2" Text="Delete" Clicked="OnDeleteItemClicked" />
                                         </StackLayout>
                                     </VerticalStackLayout>
                                 </Frame>
