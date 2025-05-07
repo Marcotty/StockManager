@@ -9,7 +9,6 @@ namespace StockManager.Pages;
 public partial class StoragePage : ContentPage
 {
     private readonly IStockService _stockService;
-    public ImageSource ImageSource { get; set; } = "cart.png";
     public ObservableCollection<Item> Stock { get; set; }
     public ObservableCollection<Item> FilteredStock { get; set; }
     public ObservableCollection<Tuple<Item, bool>> SelectedStock { get; set; }

@@ -12,13 +12,13 @@
             Order="Primary"   
             Priority="0"   
             Clicked="OnAddToCartItems" />
-        
-        <!--<ToolbarItem Text="&lt;-"   
+
+        <ToolbarItem Text="&lt;-"   
             IconImageSource="add.png"   
             Order="Primary"   
             Priority="0"
             IsEnabled="{Binding IsReverseEnabled}"
-            Clicked="OnReverseClicked" />-->
+            Clicked="OnReverseClicked" />
 
         <ToolbarItem Text="Delete"   
             IconImageSource="delete.png"   
