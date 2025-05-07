@@ -4,27 +4,30 @@
              x:Class="StockManager.MainPage"
              Title="Stock Manager">
 
-    <ScrollView>  
-       <FlexLayout Direction="Row"  
-                   JustifyContent="SpaceAround"  
-                   AlignItems="Center"  
-                   Wrap="Wrap">
-            <Button Text="Stockage"  
-                    WidthRequest="120"  
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center">
+            <Button Text="Stockage" 
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Gray200}}"
+                    Margin="20"
+                    WidthRequest="180"  
                     HeightRequest="120"  
-                    BackgroundColor="LightBlue"  
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"  
                     Command="{Binding StorageCommand}" />
-            <Button Text="Courses"  
-                   WidthRequest="120"  
-                   HeightRequest="120"  
-                   BackgroundColor="LightGreen"
-                   Command="{Binding ShoppingCommand}" />
-            <Button Text="Recettes"  
-                   WidthRequest="120"  
-                   HeightRequest="120"  
-                   BackgroundColor="LightCoral"
-                   Command="{Binding RecipesCommand}" />
-       </FlexLayout>  
+            <Button Text="Courses"
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Gray200}}"
+                    Margin="20"
+                    WidthRequest="180"
+                    HeightRequest="120"  
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"
+                    Command="{Binding ShoppingCommand}" />
+            <Button Text="Recettes"
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Gray200}}"
+                    Margin="20"
+                    WidthRequest="180"  
+                    HeightRequest="120"  
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"
+                    Command="{Binding RecipesCommand}" />
+       </VerticalStackLayout>  
     </ScrollView>
 
 </ContentPage>
