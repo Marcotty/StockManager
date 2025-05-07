@@ -12,10 +12,21 @@ public partial class StoragePage : ContentPage
     public ObservableCollection<Item> Stock { get; set; }
     public ObservableCollection<Item> FilteredStock { get; set; }
     public ObservableCollection<Tuple<Item, bool>> SelectedStock { get; set; }
+    public ObservableCollection<Tuple<Item, int>> DeletedItems { get; set; }
     public ICommand ItemTappedCommand => new Command<Item>(OnItemTapped);
     private List<Item> _allItems;
     public bool IsPanelEnabled { get; set; }
     private bool _isFrameVisible;
+    private bool _isReverseEnabled;
+    public bool IsReverseEnabled
+    {
+        get => _isReverseEnabled;
+        set
+        {
+            _isReverseEnabled = value;
+            OnPropertyChanged(nameof(IsReverseEnabled));
+        }
+    }
     public bool IsFrameVisible
     {
         get => _isFrameVisible;
@@ -45,8 +56,10 @@ public partial class StoragePage : ContentPage
         Stock = new ObservableCollection<Item>(_allItems);
         FilteredStock = new ObservableCollection<Item>(_allItems);
         SelectedStock = new ObservableCollection<Tuple<Item, bool>>();
+        DeletedItems = [];
         IsFrameVisible = false;
         IsPanelEnabled = false;
+        IsReverseEnabled = false;
         BindingContext = this;
     }
 
@@ -88,6 +101,7 @@ public partial class StoragePage : ContentPage
     {
         if (sender is Button button && button.BindingContext is Item item)
         {
+            DeletedItems.Add(new Tuple<Item, int>(item, FilteredStock.IndexOf(item)));
             // Remove the item from the stock
             _stockService.DeleteItemFromStock(item.Id);
             FilteredStock.Remove(item);
@@ -96,6 +110,7 @@ public partial class StoragePage : ContentPage
             _selectedItem = null;
             OnPropertyChanged(nameof(FilteredStock));
         }
+        IsReverseEnabled = DeletedItems.Count > 0;
     }
 
     private async void OnAddToCartItems(object sender, EventArgs e)
@@ -127,6 +142,7 @@ public partial class StoragePage : ContentPage
         {
             if (item.Item2)
             {
+                DeletedItems.Add(new Tuple<Item, int>(item.Item1, FilteredStock.IndexOf(item.Item1)));
                 _stockService.DeleteItemFromStock(item.Item1.Id);
                 FilteredStock.Remove(item.Item1);
                 Stock.Remove(item.Item1);
@@ -135,6 +151,23 @@ public partial class StoragePage : ContentPage
         }
         SelectedStock.Clear();
         OnPropertyChanged(nameof(FilteredStock));
+        IsReverseEnabled = DeletedItems.Count > 0;
+    }
+
+    private void OnReverseClicked(object sender, EventArgs e)
+    {
+        if (DeletedItems.Count > 0)
+        {
+            var lastDeletedItem = DeletedItems.Last();
+            DeletedItems.Remove(lastDeletedItem);
+            _allItems.Add(lastDeletedItem.Item1);
+            Stock.Add(lastDeletedItem.Item1);
+            FilteredStock.Insert(lastDeletedItem.Item2, lastDeletedItem.Item1);
+            _stockService.AddItemToStockList(lastDeletedItem.Item1);
+            OnPropertyChanged(nameof(FilteredStock));
+
+            IsReverseEnabled = DeletedItems.Count > 0;
+        }
     }
 
     private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
