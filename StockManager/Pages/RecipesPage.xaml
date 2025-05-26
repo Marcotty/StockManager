@@ -2,11 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StockManager.Pages.RecipesPage"
-             Title="RecipesPage">
+             xmlns:models="clr-namespace:StockManager.Model"
+             xmlns:local="clr-namespace:StockManager.Pages">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <SearchBar Placeholder="Search recipes"
+                   TextChanged="OnSearchBarTextChanged" />
+        <ScrollView>
+            <CollectionView x:Name="collectionView"
+                ItemsSource="{Binding FilteredRecipes}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Recipe">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}"
+                               FontSize="24"
+                               FontAttributes="Bold" />
+                            <Label Text="{Binding Description}"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

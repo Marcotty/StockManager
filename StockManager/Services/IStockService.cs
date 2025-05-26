@@ -21,5 +21,6 @@ namespace StockManager.Services
         Item? GetItemFromStockListById(string Id);
         void SaveStockListToStockFile();
         List<Item> LoadStockListFromStockFile();
+        List<Recipe> GetRecipes();
     }
 }
