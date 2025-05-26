@@ -5,27 +5,27 @@
              Title="Stock Manager">
 
     <ScrollView>
-        <VerticalStackLayout VerticalOptions="Center">
+        <VerticalStackLayout HorizontalOptions="Fill" Margin="20" Spacing="20">
             <Button Text="Stockage" 
-                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Gray200}}"
-                    Margin="20"
-                    WidthRequest="180"  
-                    HeightRequest="120"  
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"  
+                    TextColor="{OnIdiom Gray100, Phone={AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Test2}}, Tablet=Green, Desktop=Blue}"
+                    HeightRequest="200"  
+                    BackgroundColor="{OnIdiom Gray100, Phone={AppThemeBinding Light={StaticResource Gray100}, Dark=Transparent}, Tablet=Green, Desktop=Blue}"
+                    BorderColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Test2}}"
+                    BorderWidth="1"
                     Command="{Binding StorageCommand}" />
             <Button Text="Courses"
-                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Gray200}}"
-                    Margin="20"
-                    WidthRequest="180"
-                    HeightRequest="120"  
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"
+                    TextColor="{OnIdiom Gray100, Phone={AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Test2}}, Tablet=Green, Desktop=Blue}"
+                    HeightRequest="200"  
+                    BackgroundColor="{OnIdiom Gray100, Phone={AppThemeBinding Light={StaticResource Gray100}, Dark=Transparent}, Tablet=Green, Desktop=Blue}"
+                    BorderColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Test2}}"
+                    BorderWidth="1"
                     Command="{Binding ShoppingCommand}" />
             <Button Text="Recettes"
-                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Gray200}}"
-                    Margin="20"
-                    WidthRequest="180"  
-                    HeightRequest="120"  
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"
+                    TextColor="{OnIdiom Gray100, Phone={AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Test2}}, Tablet=Green, Desktop=Blue}"
+                    HeightRequest="200"  
+                    BackgroundColor="{OnIdiom Gray100, Phone={AppThemeBinding Light={StaticResource Gray100}, Dark=Transparent}, Tablet=Green, Desktop=Blue}"
+                    BorderColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource Test2}}"
+                    BorderWidth="1"
                     Command="{Binding RecipesCommand}" />
        </VerticalStackLayout>  
     </ScrollView>
