@@ -4,12 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:StockManager.Pages"
-    Shell.FlyoutBehavior="Flyout"
-    Title="StockManager">
+    xmlns:views="clr-namespace:StockManager.Pages">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate pages:RecipesPage}"
-        Route="MainPage" />
+
+    <TabBar>
+        <Tab Title="Recipes"
+            Icon="cat.png">
+            <ShellContent ContentTemplate="{DataTemplate views:RecipesPage}" />
+        </Tab>
+        <Tab Title="Stock"
+            Icon="cat.png">
+            <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" />
+        </Tab>
+        <Tab Title="Cart"
+            Icon="cart.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ShoppingPage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>
