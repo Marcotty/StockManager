@@ -13,7 +13,7 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="Test">#33a99d</Color>
-    <Color x:Key="Test2">#52c2b6</Color>
+    <Color x:Key="SciFiTheme">#52c2b6</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
