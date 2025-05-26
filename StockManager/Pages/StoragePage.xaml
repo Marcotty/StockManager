@@ -54,7 +54,6 @@
                                 <VerticalStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:StoragePage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
                                 </VerticalStackLayout.GestureRecognizers>
-                                <!-- Item Content -->
                                 <Grid VerticalOptions="Center">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -73,8 +72,6 @@
                                     </StackLayout>
                                     <ImageButton Source="cart.png" Grid.Column="3" WidthRequest="10" HeightRequest="10" />
                                 </Grid>
-
-                                <!-- Frame for tapped item -->
                                 <Frame x:Name="DetailsFrame" IsVisible="{Binding ShowPanel}" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
                                     <VerticalStackLayout>
                                         <Grid >

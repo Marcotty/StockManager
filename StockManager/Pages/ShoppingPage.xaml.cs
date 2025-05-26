@@ -70,10 +70,7 @@ public partial class ShoppingPage : ContentPage
             InStock = false,
         });
         _stockService.AddNewItemToShoppingList();
-        OnPropertyChanged(nameof(Items));
-
-        // Set focus on the last added item
-       
+        OnPropertyChanged(nameof(Items));       
     }
 
     private void OnValidateClicked(object sender, EventArgs e)
@@ -160,15 +157,10 @@ public partial class ShoppingPage : ContentPage
                 _stockService.AddItemToShoppingList(item);
                 _stockService.UpdateItemToStockList(item);
             }
-            // Save the current state of items to the file
-            //_stockService.SaveShoppingListToStockFile();
-
-            // Log or perform any cleanup actions
             Console.WriteLine("ShoppingPage is exiting. State saved.");
         }
         catch (Exception ex)
         {
-            // Handle any exceptions that occur during the exit process
             Console.WriteLine($"Error during OnDisappearing: {ex.Message}");
         }
     }

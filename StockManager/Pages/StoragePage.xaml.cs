@@ -66,14 +66,12 @@ public partial class StoragePage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        // Save the stock data when the page disappears
         _stockService.SaveStockListToStockFile();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        // Load the stock data when the page appears
         FilteredStock.Clear();
         foreach (var item in _stockService.GetItemsFromStock())
         {
@@ -102,7 +100,6 @@ public partial class StoragePage : ContentPage
         if (sender is Button button && button.BindingContext is Item item)
         {
             DeletedItems.Add(new Tuple<Item, int>(item, FilteredStock.IndexOf(item)));
-            // Remove the item from the stock
             _stockService.DeleteItemFromStock(item.Id);
             FilteredStock.Remove(item);
             Stock.Remove(item);
@@ -137,7 +134,6 @@ public partial class StoragePage : ContentPage
     }
     private void OnDeleteItems(object sender, EventArgs e)
     {
-        // Handle delete items logic
         foreach (var item in SelectedStock)
         {
             if (item.Item2)
@@ -172,7 +168,6 @@ public partial class StoragePage : ContentPage
 
     private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
     {
-        // Pass the search query to the filtering method
         OnSearchQueryChanged(e.NewTextValue);
     }
 
@@ -180,7 +175,6 @@ public partial class StoragePage : ContentPage
     {
         if (string.IsNullOrWhiteSpace(query))
         {
-            // Reset the filtered list to show all items
             FilteredStock.Clear();
             foreach (var item in _allItems)
             {
@@ -189,7 +183,6 @@ public partial class StoragePage : ContentPage
         }
         else
         {
-            // Filter items based on the search query
             var filteredItems = _allItems
                 .Where(item => item.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
                                item.Description.Contains(query, StringComparison.OrdinalIgnoreCase))
@@ -225,38 +218,23 @@ public partial class StoragePage : ContentPage
     private async void OnItemTapped(Item selectedItem)
     {
         selectedItem.ShowPanel = !selectedItem.ShowPanel;
-        // Animate the panel visibility
-        var frame = FindFrameForItem(selectedItem); // Helper method to locate the Frame
+        var frame = FindFrameForItem(selectedItem);
         if (frame != null)
         {
             if (selectedItem.ShowPanel)
             {
-                // Animate showing the panel
                 frame.Opacity = 0;
                 frame.IsVisible = true;
-                await frame.FadeTo(1, 250); // Fade in over 250ms
-                await frame.TranslateTo(0, 0, 250, Easing.SinOut); // Slide in
+                await frame.FadeTo(1, 250);
+                await frame.TranslateTo(0, 0, 250, Easing.SinOut);
             }
             else
             {
-                // Animate hiding the panel
-                await frame.FadeTo(0, 200); // Fade out over 200ms
-                await frame.TranslateTo(0, 20, 250, Easing.SinOut); // Slide out
+                await frame.FadeTo(0, 200);
+                await frame.TranslateTo(0, 20, 250, Easing.SinOut);
                 frame.IsVisible = false;
             }
         }
-        /* // Hide other panels
-        foreach (var item in FilteredStock)
-        {
-            if (item != selectedItem)
-            {
-                item.ShowPanel = false;
-                frame = FindFrameForItem(selectedItem);
-                await frame.FadeTo(0, 200); // Fade out over 200ms
-                await frame.TranslateTo(0, 20, 250, Easing.SinOut); // Slide out
-                frame.IsVisible = false;
-            }
-        }*/
     }
 
     private async void OnEditClicked(object sender, EventArgs e)
@@ -274,16 +252,14 @@ public partial class StoragePage : ContentPage
 
     private Frame? FindFrameForItem(Item item)
     {
-        // Assuming the CollectionView is named "collectionView"
         var collectionView = this.FindByName<CollectionView>("collectionView");
         if (collectionView == null) return null;
 
-        // Workaround for the missing 'ContainerFromItem' method
         foreach (var visualElement in collectionView.LogicalChildren.OfType<VisualElement>())
         {
             if (visualElement.BindingContext == item)
             {
-                return visualElement.FindByName<Frame>("DetailsFrame"); // Replace "DetailsFrame" with the x:Name of your Frame
+                return visualElement.FindByName<Frame>("DetailsFrame");
             }
         }
 
@@ -302,7 +278,6 @@ public partial class StoragePage : ContentPage
             _ => FilteredStock.ToList()
         };
 
-        // Update the FilteredStock collection
         FilteredStock.Clear();
         foreach (var item in sortedItems)
         {
@@ -316,7 +291,6 @@ public partial class StoragePage : ContentPage
     {
         if (sender is CheckBox checkBox && checkBox.BindingContext is Item item)
         {
-            // Add or remove the item from the SelectedStock collection
             if (item.IsSelected)
             {
                 SelectedStock.Add(new Tuple<Item, bool>(item, true));
