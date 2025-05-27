@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StockManager.Pages.RecipesPage"
-             xmlns:models="clr-namespace:StockManager.Model"
-             xmlns:local="clr-namespace:StockManager.Pages">
-    <VerticalStackLayout>
-        <SearchBar Placeholder="Search recipes"
-                   TextChanged="OnSearchBarTextChanged" />
-        <ScrollView>
-            <CollectionView x:Name="collectionView"
-                ItemsSource="{Binding FilteredRecipes}"
-                SelectionMode="None">
-                <CollectionView.ItemTemplate>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+            x:Class="StockManager.Pages.RecipesPage"  
+            xmlns:models="clr-namespace:StockManager.Model">  
+       
+    <Grid
+          RowDefinitions="Auto,*,Auto">
+        <SearchBar Placeholder="Search recipes"  
+           TextChanged="OnSearchBarTextChanged" 
+           Margin="10"/>
+        <ScrollView Grid.Row="1" Margin="20">
+            <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}">
+                <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}"
-                               FontSize="24"
-                               FontAttributes="Bold" />
-                            <Label Text="{Binding Description}"
-                               FontSize="14"
-                               TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                        <VerticalStackLayout HorizontalOptions="Center">
+                            <Image Source="dotnet_bot.png"  
+                       HeightRequest="200"  
+                       Aspect="AspectFill" />
+                            <Label Text="{Binding Name}"  
+                       FontSize="24"  
+                       FontAttributes="Bold" />
+                            <Label Text="{Binding Description}"  
+                       FontSize="14"  
+                       TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
                         </VerticalStackLayout>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
         </ScrollView>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
