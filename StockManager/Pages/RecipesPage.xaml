@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
             x:Class="StockManager.Pages.RecipesPage"  
+            x:DataType="local:RecipesPage"
             xmlns:models="clr-namespace:StockManager.Model"
             xmlns:local="clr-namespace:StockManager.Pages">
     
@@ -14,7 +15,7 @@
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}" Spacing="8">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
-                        <Border 
+                        <Border    
                             Stroke="LightGrey"
                             StrokeThickness="1"
                             Background="White"

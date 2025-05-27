@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
              x:Class="StockManager.Pages.StoragePage"  
+             x:DataType="local:StoragePage"
              xmlns:models="clr-namespace:StockManager.Model"
              xmlns:local="clr-namespace:StockManager.Pages"  
              Title="Stock">

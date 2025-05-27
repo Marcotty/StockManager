@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
             x:Class="StockManager.Pages.ShoppingPage"  
-            xmlns:models="clr-namespace:StockManager.Model"  
+            x:DataType="local:ShoppingPage"
+            xmlns:models="clr-namespace:StockManager.Model" 
+            xmlns:local="clr-namespace:StockManager.Pages"
             Title="Shopping">  
    <ContentPage.ToolbarItems>
 
