@@ -9,7 +9,7 @@
         <SearchBar Placeholder="Search recipes"  
            TextChanged="OnSearchBarTextChanged" 
            Margin="10"/>
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}" Spacing="8">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
