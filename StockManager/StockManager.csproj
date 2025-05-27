@@ -61,7 +61,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\Recipes\apple_pie.svg" />
+	  <None Remove="Resources\Images\Recipes\chicken_curry.svg" />
+	  <None Remove="Resources\Images\Recipes\fruit_salad.svg" />
+	  <None Remove="Resources\Images\Recipes\omelette.svg" />
 	  <None Remove="Resources\Images\Recipes\spag.svg" />
+	  <None Remove="Resources\Images\Recipes\spaghetti.svg" />
+	  <None Remove="Resources\Images\Recipes\vegetable_stir_fry.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -88,7 +94,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Images\Recipes\" />
+	  <MauiImage Include="Resources\Images\Recipes\apple_pie.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\chicken_curry.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\fruit_salad.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\omelette.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\spaghetti.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\vegetable_stir_fry.svg" />
 	</ItemGroup>
 
 </Project>
