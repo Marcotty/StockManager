@@ -1,6 +1,7 @@
 using StockManager.Model;
 using StockManager.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace StockManager.Pages;
 
@@ -9,7 +10,8 @@ public partial class RecipesPage : ContentPage
 	private readonly IStockService _stockService;
     private List<Recipe> _recipes;
     public ObservableCollection<Recipe> FilteredRecipes { get; set; }
-    public Command AddRecipeToCartCommand => new Command<Recipe>(OnAddToCartClicked);
+    public ICommand AddRecipeToCartCommand => new Command<Recipe>(OnAddToCartClicked);
+    public ICommand ItemTappedCommand => new Command<Item>(OnItemTapped);
 
     public RecipesPage(IStockService stockService)
     {
@@ -29,6 +31,13 @@ public partial class RecipesPage : ContentPage
             FilteredRecipes.Add(item);
         }
         OnPropertyChanged(nameof(FilteredRecipes));
+    }
+
+    private async void OnItemTapped(Item item)
+    {
+        if (item == null) return;
+        var itemDetailsPage = new RecipeDetailsPage(item);
+        await Navigation.PushAsync(itemDetailsPage);
     }
 
     private async void OnAddToCartClicked(Recipe recipe)
