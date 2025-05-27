@@ -10,15 +10,15 @@
     <TabBar>
         <Tab Title="Recipes"
             Icon="house.png">
-            <ShellContent ContentTemplate="{DataTemplate views:RecipesPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:RecipesPage}" Route="RecipesPage"/>
         </Tab>
         <Tab Title="Stock"
             Icon="storage.png">
-            <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" Route="StoragePage"/>
         </Tab>
         <Tab Title="Cart"
             Icon="cart.png">
-            <ShellContent ContentTemplate="{DataTemplate views:ShoppingPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:ShoppingPage}" Route="ShoppingPage"/>
         </Tab>
     </TabBar>
 
