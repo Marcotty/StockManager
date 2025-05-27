@@ -43,11 +43,10 @@
                                    FontSize="14"  
                                    TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
                                 <ImageButton Source="cart.png" 
-                                             WidthRequest="10" 
-                                             HeightRequest="10" 
-                                             VerticalOptions="End" 
-                                             Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}"
-                                             />
+                                    WidthRequest="10" 
+                                    HeightRequest="10" 
+                                    VerticalOptions="End" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}"/>
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>
