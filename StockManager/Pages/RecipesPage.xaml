@@ -12,9 +12,6 @@
            Margin="10"/>
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}" Spacing="8">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
-                </StackLayout.GestureRecognizers>
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
                         <Border 
@@ -32,6 +29,9 @@
                                 <RoundRectangle CornerRadius="15"></RoundRectangle>
                             </Border.StrokeShape>
                             <VerticalStackLayout HorizontalOptions="Center" Padding="48" BackgroundColor="White">
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
+                                </VerticalStackLayout.GestureRecognizers>
                                 <Image Source="dotnet_bot.png"  
                                    HeightRequest="180"  
                                    Aspect="AspectFill" />

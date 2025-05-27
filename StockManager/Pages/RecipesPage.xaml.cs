@@ -11,7 +11,7 @@ public partial class RecipesPage : ContentPage
     private List<Recipe> _recipes;
     public ObservableCollection<Recipe> FilteredRecipes { get; set; }
     public ICommand AddRecipeToCartCommand => new Command<Recipe>(OnAddToCartClicked);
-    public ICommand ItemTappedCommand => new Command<Item>(OnItemTapped);
+    public ICommand ItemTappedCommand => new Command<Recipe>(OnItemTapped);
 
     public RecipesPage(IStockService stockService)
     {
