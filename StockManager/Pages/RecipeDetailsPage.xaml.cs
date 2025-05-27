@@ -1,0 +1,9 @@
+namespace StockManager.Pages;
+
+public partial class RecipeDetailsPage : ContentPage
+{
+	public RecipeDetailsPage()
+	{
+		InitializeComponent();
+	}
+}
