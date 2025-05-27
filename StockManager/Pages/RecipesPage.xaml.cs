@@ -9,6 +9,7 @@ public partial class RecipesPage : ContentPage
 	private readonly IStockService _stockService;
     private List<Recipe> _recipes;
     public ObservableCollection<Recipe> FilteredRecipes { get; set; }
+    public Command AddRecipeToCartCommand => new Command<Recipe>(OnAddToCartClicked);
 
     public RecipesPage(IStockService stockService)
     {
@@ -28,6 +29,20 @@ public partial class RecipesPage : ContentPage
             FilteredRecipes.Add(item);
         }
         OnPropertyChanged(nameof(FilteredRecipes));
+    }
+
+    private async void OnAddToCartClicked(Recipe recipe)
+    {
+        if (recipe == null) return;
+        foreach (var ingredient in recipe.Ingredients)
+        {
+            _stockService.UpdateItemToShoppingList(ingredient);
+        }
+        bool confirm = await DisplayAlert("Success", $"{recipe.Name} ingredients has been added to your shopping list.\\n Go to shopping list ?", "Yes", "No");
+        if (confirm)
+        {
+            await Shell.Current.GoToAsync("//ShoppingPage");
+        }
     }
 
     private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
