@@ -32,42 +32,42 @@ namespace StockManager.Services
                     new(Guid.NewGuid().ToString(), "Flour", "All-purpose flour", 2, "Supermarket B", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Sugar", "Granulated sugar", 1, "Supermarket C", DateTime.Now.AddMonths(12), true, false),
                     new(Guid.NewGuid().ToString(), "Butter", "Unsalted butter", 1, "Supermarket D", DateTime.Now.AddDays(15), false, false)
-                }, new Image { Source = "dotnet_bot.png"}),
+                }, new Image { Source = "spag.png"}),
                 new("Spaghetti Bolognese", "Classic Italian pasta dish.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Spaghetti", "Dry spaghetti pasta", 1, "Supermarket F", DateTime.Now.AddMonths(12), false, true),
                     new(Guid.NewGuid().ToString(), "Ground Beef", "Fresh ground beef", 1, "Supermarket E", DateTime.Now.AddDays(2), false, false),
                     new(Guid.NewGuid().ToString(), "Tomato Sauce", "Canned tomato sauce", 2, "Supermarket G", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Onion", "Chopped onion", 1, "Supermarket L", DateTime.Now.AddMonths(2), false, false)
-                }, new Image { Source = "dotnet_bot.png"}),
+                }, new Image { Source = "spag.png"}),
                 new("Chicken Curry", "Spicy chicken curry with rice.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Chicken", "Boneless chicken pieces", 1, "Supermarket E", DateTime.Now.AddDays(2), false, false),
                     new(Guid.NewGuid().ToString(), "Curry Powder", "Spicy curry powder", 1, "Supermarket M", DateTime.Now.AddMonths(12), false, true),
                     new(Guid.NewGuid().ToString(), "Coconut Milk", "Canned coconut milk", 1, "Supermarket N", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Rice", "Basmati rice", 1, "Supermarket D", DateTime.Now.AddMonths(6), false, true)
-                }, new Image { Source = "dotnet_bot.png"}),
+                }, new Image { Source = "spag.png"}),
                 new("Vegetable Stir Fry", "Healthy mixed vegetable stir fry.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Broccoli", "Fresh broccoli", 1, "Supermarket H", DateTime.Now.AddDays(5), false, false),
                     new(Guid.NewGuid().ToString(), "Carrots", "Sliced carrots", 2, "Supermarket K", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Bell Pepper", "Red bell pepper", 1, "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Soy Sauce", "Bottled soy sauce", 1, "Supermarket O", DateTime.Now.AddMonths(12), false, true)
-                }, new Image { Source = "dotnet_bot.png"}),
+                }, new Image { Source = "spag.png"}),
                 new("Omelette", "Simple cheese and ham omelette.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Eggs", "Fresh eggs", 3, "Supermarket B", DateTime.Now.AddDays(10), false, false),
                     new(Guid.NewGuid().ToString(), "Cheese", "Grated cheddar cheese", 1, "Supermarket B", DateTime.Now.AddDays(20), false, false),
                     new(Guid.NewGuid().ToString(), "Ham", "Sliced ham", 1, "Supermarket P", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Milk", "Whole milk", 1, "Supermarket B", DateTime.Now.AddDays(5), false, false)
-                }, new Image { Source = "dotnet_bot.png"}),
+                }, new Image { Source = "spag.png"}),
                 new("Fruit Salad", "Refreshing mixed fruit salad.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Bananas", "Fresh bananas", 2, "Supermarket H", DateTime.Now.AddDays(3), false, false),
                     new(Guid.NewGuid().ToString(), "Oranges", "Juicy oranges", 2, "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Apples", "Crisp apples", 2, "Supermarket A", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt", 1, "Supermarket N", DateTime.Now.AddDays(10), false, false)
-                }, new Image { Source = "dotnet_bot.png"})
+                }, new Image { Source = "spag.png"})
             ];
         }
 

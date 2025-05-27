@@ -9,11 +9,11 @@
 
     <TabBar>
         <Tab Title="Recipes"
-            Icon="cat.png">
+            Icon="house.png">
             <ShellContent ContentTemplate="{DataTemplate views:RecipesPage}" />
         </Tab>
         <Tab Title="Stock"
-            Icon="cat.png">
+            Icon="storage.png">
             <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" />
         </Tab>
         <Tab Title="Cart"

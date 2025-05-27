@@ -2,28 +2,43 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
             x:Class="StockManager.Pages.RecipesPage"  
-            xmlns:models="clr-namespace:StockManager.Model">  
-       
-    <Grid
+            xmlns:models="clr-namespace:StockManager.Model">
+
+    <Grid BackgroundColor="{StaticResource White}"
           RowDefinitions="Auto,*,Auto">
         <SearchBar Placeholder="Search recipes"  
            TextChanged="OnSearchBarTextChanged" 
            Margin="10"/>
-        <ScrollView Grid.Row="1" Margin="20">
-            <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}">
+        <ScrollView Grid.Row="1">
+            <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}" Spacing="8">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
-                        <VerticalStackLayout HorizontalOptions="Center">
-                            <Image Source="dotnet_bot.png"  
-                       HeightRequest="200"  
-                       Aspect="AspectFill" />
-                            <Label Text="{Binding Name}"  
-                       FontSize="24"  
-                       FontAttributes="Bold" />
-                            <Label Text="{Binding Description}"  
-                       FontSize="14"  
-                       TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
-                        </VerticalStackLayout>
+                        <Border 
+                            Stroke="LightGrey"
+                            StrokeThickness="1"
+                            Background="White"
+                            Margin="10">
+                            <Border.Shadow>
+                                <Shadow Brush="Black"
+                                    Offset="4,4"
+                                    Radius="10"
+                                    Opacity="0.2" />
+                            </Border.Shadow>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"></RoundRectangle>
+                            </Border.StrokeShape>
+                            <VerticalStackLayout HorizontalOptions="Center" Padding="48" BackgroundColor="White">
+                                <Image Source="dotnet_bot.png"  
+                                   HeightRequest="180"  
+                                   Aspect="AspectFill" />
+                                <Label Text="{Binding Name}"  
+                                   FontSize="24"  
+                                   FontAttributes="Bold" />
+                                <Label Text="{Binding Description}"  
+                                   FontSize="14"  
+                                   TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                            </VerticalStackLayout>
+                        </Border>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
