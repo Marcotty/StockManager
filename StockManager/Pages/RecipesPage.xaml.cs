@@ -33,10 +33,10 @@ public partial class RecipesPage : ContentPage
         OnPropertyChanged(nameof(FilteredRecipes));
     }
 
-    private async void OnItemTapped(Item item)
+    private async void OnItemTapped(Recipe recipe)
     {
-        if (item == null) return;
-        var itemDetailsPage = new RecipeDetailsPage(item);
+        if (recipe == null) return;
+        var itemDetailsPage = new RecipeDetailsPage(recipe);
         await Navigation.PushAsync(itemDetailsPage);
     }
 

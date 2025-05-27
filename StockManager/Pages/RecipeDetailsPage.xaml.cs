@@ -1,9 +1,13 @@
+using StockManager.Model;
+
 namespace StockManager.Pages;
 
 public partial class RecipeDetailsPage : ContentPage
 {
-	public RecipeDetailsPage(Model.Item item)
+	private Recipe Recipe { get; set; }
+    public RecipeDetailsPage(Recipe recipe)
 	{
-		InitializeComponent();
+        Recipe = recipe;
+        InitializeComponent();
 	}
 }
