@@ -36,42 +36,51 @@ namespace StockManager.Services
                     new(Guid.NewGuid().ToString(), "Flour", "All-purpose flour", 2, "Supermarket B", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Sugar", "Granulated sugar", 1, "Supermarket C", DateTime.Now.AddMonths(12), true, false),
                     new(Guid.NewGuid().ToString(), "Butter", "Unsalted butter", 1, "Supermarket D", DateTime.Now.AddDays(15), false, false)
-                }, "Ressources/Images/Recipes/apple_pie.png"),
+                }, "Ressources/Images/Recipes/apple_pie.png", ""),
                 new("Spaghetti Bolognese", "Classic Italian pasta dish.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Spaghetti", "Dry spaghetti pasta", 1, "Supermarket F", DateTime.Now.AddMonths(12), false, true),
                     new(Guid.NewGuid().ToString(), "Ground Beef", "Fresh ground beef", 1, "Supermarket E", DateTime.Now.AddDays(2), false, false),
                     new(Guid.NewGuid().ToString(), "Tomato Sauce", "Canned tomato sauce", 2, "Supermarket G", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Onion", "Chopped onion", 1, "Supermarket L", DateTime.Now.AddMonths(2), false, false)
-                }, "Ressources/Images/Recipes/spaghetti.png"),
+                }, "Ressources/Images/Recipes/spaghetti.png", "Heat the olive oil in a large pan over medium heat.\r\n" +
+                "Add the onion, garlic, carrot, and celery. Cook for 5 to 7 minutes until soft.\r\n" +
+                "Add the ground beef and cook until browned, breaking it up with a spoon.\r\n" +
+                "Stir in the tomato paste and cook for 1 to 2 minutes.\r\n" +
+                "Add the red wine if using and let it simmer for 2 minutes.\r\n" +
+                "Add the chopped tomatoes, oregano, salt, and pepper. Stir well.\r\n" +
+                "Lower the heat and simmer the sauce uncovered for 20 to 30 minutes. Stir occasionally.\r\n" +
+                "Meanwhile, cook the spaghetti in a pot of salted boiling water until al dente. Drain.\r\n" +
+                "Serve the spaghetti topped with the Bolognese sauce.\r\n" +
+                "Garnish with fresh herbs and grated Parmesan if desired."),
                 new("Chicken Curry", "Spicy chicken curry with rice.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Chicken", "Boneless chicken pieces", 1, "Supermarket E", DateTime.Now.AddDays(2), false, false),
                     new(Guid.NewGuid().ToString(), "Curry Powder", "Spicy curry powder", 1, "Supermarket M", DateTime.Now.AddMonths(12), false, true),
                     new(Guid.NewGuid().ToString(), "Coconut Milk", "Canned coconut milk", 1, "Supermarket N", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Rice", "Basmati rice", 1, "Supermarket D", DateTime.Now.AddMonths(6), false, true)
-                }, "Ressources/Images/Recipes/chicken_curry.png"),
+                }, "Ressources/Images/Recipes/chicken_curry.png", ""),
                 new("Vegetable Stir Fry", "Healthy mixed vegetable stir fry.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Broccoli", "Fresh broccoli", 1, "Supermarket H", DateTime.Now.AddDays(5), false, false),
                     new(Guid.NewGuid().ToString(), "Carrots", "Sliced carrots", 2, "Supermarket K", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Bell Pepper", "Red bell pepper", 1, "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Soy Sauce", "Bottled soy sauce", 1, "Supermarket O", DateTime.Now.AddMonths(12), false, true)
-                }, "Ressources/Images/Recipes/vegetable_stir_fry.png"),
+                }, "Ressources/Images/Recipes/vegetable_stir_fry.png", ""),
                 new("Omelette", "Simple cheese and ham omelette.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Eggs", "Fresh eggs", 3, "Supermarket B", DateTime.Now.AddDays(10), false, false),
                     new(Guid.NewGuid().ToString(), "Cheese", "Grated cheddar cheese", 1, "Supermarket B", DateTime.Now.AddDays(20), false, false),
                     new(Guid.NewGuid().ToString(), "Ham", "Sliced ham", 1, "Supermarket P", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Milk", "Whole milk", 1, "Supermarket B", DateTime.Now.AddDays(5), false, false)
-                }, "Ressources/Images/Recipes/omelette.png"),
+                }, "Ressources/Images/Recipes/omelette.png", ""),
                 new("Fruit Salad", "Refreshing mixed fruit salad.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Bananas", "Fresh bananas", 2, "Supermarket H", DateTime.Now.AddDays(3), false, false),
                     new(Guid.NewGuid().ToString(), "Oranges", "Juicy oranges", 2, "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Apples", "Crisp apples", 2, "Supermarket A", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt", 1, "Supermarket N", DateTime.Now.AddDays(10), false, false)
-                }, "Ressources/Images/Recipes/fruit_salad.png")
+                }, "Ressources/Images/Recipes/fruit_salad.png", "")
             ];
         }
 
