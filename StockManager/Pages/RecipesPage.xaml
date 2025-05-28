@@ -29,7 +29,7 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="15"></RoundRectangle>
                             </Border.StrokeShape>
-                            <VerticalStackLayout HorizontalOptions="Center" Padding="48" BackgroundColor="White">
+                            <VerticalStackLayout HorizontalOptions="Center" Padding="48" Spacing="10" BackgroundColor="White">
                                 <VerticalStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
                                 </VerticalStackLayout.GestureRecognizers>
@@ -42,11 +42,33 @@
                                 <Label Text="{Binding Description}"  
                                    FontSize="14"  
                                    TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
-                                <ImageButton Source="cart.png" 
-                                    WidthRequest="10" 
-                                    HeightRequest="10" 
-                                    VerticalOptions="End" 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}"/>
+                                <Border
+                                    Stroke="LightGrey"
+                                    StrokeThickness="2"
+                                    Padding="20">
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                            Offset="4,4"
+                                            Radius="10"
+                                            Opacity="0.2" />
+                                    </Border.Shadow>
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="15"></RoundRectangle>
+                                    </Border.StrokeShape>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}" />
+                                        </StackLayout.GestureRecognizers>
+                                        <Label Text="Add to shopping list" 
+                                           FontAttributes="Bold" 
+                                           FontSize="15"
+                                           VerticalOptions="Center"/>
+                                        <Image Source="cart.png" 
+                                           WidthRequest="30" 
+                                           HeightRequest="30" 
+                                        />
+                                    </StackLayout>
+                                </Border>
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>
