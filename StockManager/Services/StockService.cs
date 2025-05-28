@@ -8,6 +8,7 @@ namespace StockManager.Services
     {
         private List<Item> _stockItems;
         private List<Item> _shoppingItems;
+        private List<Recipe> _recipes;
         public StockService() 
         {
             _stockItems = LoadStockListFromStockFile();
@@ -20,10 +21,13 @@ namespace StockManager.Services
                 }
             }
             _shoppingItems = [.. list];
+            _recipes = GetRecipes();
         }
 
         public List<Recipe> GetRecipes()
         {
+            if (_recipes != null && _recipes.Count > 0)
+                return _recipes;
             return
             [
                 new("Apple Pie", "A delicious apple pie recipe.", new List<Item>
