@@ -26,7 +26,12 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Label Text="{Binding LocalRecipe.Instructions}"/>
+        <ScrollView>
+            <VerticalStackLayout>
+                <Label Text="Instructions : " FontAttributes="Bold" FontSize="15" />
+                <Label Text="{Binding LocalRecipe.Instructions}"/>
+            </VerticalStackLayout>
+        </ScrollView>
         <Border
             Stroke="LightGrey"
             StrokeThickness="2"
