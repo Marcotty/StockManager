@@ -33,16 +33,16 @@ namespace StockManager.Services
                 new("Apple Pie", "A delicious apple pie recipe.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Apples", "Fresh apples for pie", "5", "Supermarket A", DateTime.Now.AddDays(7), true, true),
-                    new(Guid.NewGuid().ToString(), "Flour", "All-purpose flour", "200mg", "Supermarket B", DateTime.Now.AddMonths(6), false, true),
+                    new(Guid.NewGuid().ToString(), "Flour", "All-purpose flour", "200g", "Supermarket B", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Sugar", "Granulated sugar", "100g", "Supermarket C", DateTime.Now.AddMonths(12), true, false),
                     new(Guid.NewGuid().ToString(), "Butter", "Unsalted butter", "50g", "Supermarket D", DateTime.Now.AddDays(15), false, false)
                 }, "Ressources/Images/Recipes/apple_pie.png", ""),
                 new("Spaghetti Bolognese", "Classic Italian pasta dish.", new List<Item>
                 {
-                    new(Guid.NewGuid().ToString(), "Spaghetti", "Dry spaghetti pasta", "1", "Supermarket F", DateTime.Now.AddMonths(12), false, true),
-                    new(Guid.NewGuid().ToString(), "Ground Beef", "Fresh ground beef", "1", "Supermarket E", DateTime.Now.AddDays(2), false, false),
-                    new(Guid.NewGuid().ToString(), "Tomato Sauce", "Canned tomato sauce", "2", "Supermarket G", DateTime.Now.AddMonths(6), false, true),
-                    new(Guid.NewGuid().ToString(), "Onion", "Chopped onion", "1", "Supermarket L", DateTime.Now.AddMonths(2), false, false)
+                    new(Guid.NewGuid().ToString(), "Spaghetti", "Dry spaghetti pasta", "200g", "Supermarket F", DateTime.Now.AddMonths(12), false, true),
+                    new(Guid.NewGuid().ToString(), "Ground Beef", "Fresh ground beef", "100g", "Supermarket E", DateTime.Now.AddDays(2), false, false),
+                    new(Guid.NewGuid().ToString(), "Tomato Sauce", "Canned tomato sauce", "200 cl", "Supermarket G", DateTime.Now.AddMonths(6), false, true),
+                    new(Guid.NewGuid().ToString(), "Onion", "Chopped onion", "100g", "Supermarket L", DateTime.Now.AddMonths(2), false, false)
                 }, "Ressources/Images/Recipes/spaghetti.png", "Heat the olive oil in a large pan over medium heat.\r\n" +
                 "Add the onion, garlic, carrot, and celery. Cook for 5 to 7 minutes until soft.\r\n" +
                 "Add the ground beef and cook until browned, breaking it up with a spoon.\r\n" +
@@ -55,31 +55,31 @@ namespace StockManager.Services
                 "Garnish with fresh herbs and grated Parmesan if desired."),
                 new("Chicken Curry", "Spicy chicken curry with rice.", new List<Item>
                 {
-                    new(Guid.NewGuid().ToString(), "Chicken", "Boneless chicken pieces", "1", "Supermarket E", DateTime.Now.AddDays(2), false, false),
-                    new(Guid.NewGuid().ToString(), "Curry Powder", "Spicy curry powder", "1", "Supermarket M", DateTime.Now.AddMonths(12), false, true),
-                    new(Guid.NewGuid().ToString(), "Coconut Milk", "Canned coconut milk", "1", "Supermarket N", DateTime.Now.AddMonths(6), false, true),
-                    new(Guid.NewGuid().ToString(), "Rice", "Basmati rice", "1", "Supermarket D", DateTime.Now.AddMonths(6), false, true)
+                    new(Guid.NewGuid().ToString(), "Chicken", "Boneless chicken pieces", "100g", "Supermarket E", DateTime.Now.AddDays(2), false, false),
+                    new(Guid.NewGuid().ToString(), "Curry Powder", "Spicy curry powder", "100g", "Supermarket M", DateTime.Now.AddMonths(12), false, true),
+                    new(Guid.NewGuid().ToString(), "Coconut Milk", "Canned coconut milk", "100cl", "Supermarket N", DateTime.Now.AddMonths(6), false, true),
+                    new(Guid.NewGuid().ToString(), "Rice", "Basmati rice", "100g", "Supermarket D", DateTime.Now.AddMonths(6), false, true)
                 }, "Ressources/Images/Recipes/chicken_curry.png", ""),
                 new("Vegetable Stir Fry", "Healthy mixed vegetable stir fry.", new List<Item>
                 {
-                    new(Guid.NewGuid().ToString(), "Broccoli", "Fresh broccoli", "1", "Supermarket H", DateTime.Now.AddDays(5), false, false),
-                    new(Guid.NewGuid().ToString(), "Carrots", "Sliced carrots", "2", "Supermarket K", DateTime.Now.AddDays(7), false, false),
-                    new(Guid.NewGuid().ToString(), "Bell Pepper", "Red bell pepper", "1", "Supermarket I", DateTime.Now.AddDays(6), false, false),
-                    new(Guid.NewGuid().ToString(), "Soy Sauce", "Bottled soy sauce", "1", "Supermarket O", DateTime.Now.AddMonths(12), false, true)
+                    new(Guid.NewGuid().ToString(), "Broccoli", "Fresh broccoli", "100g", "Supermarket H", DateTime.Now.AddDays(5), false, false),
+                    new(Guid.NewGuid().ToString(), "Carrots", "Sliced carrots", "200mg", "Supermarket K", DateTime.Now.AddDays(7), false, false),
+                    new(Guid.NewGuid().ToString(), "Bell Pepper", "Red bell pepper", "100g", "Supermarket I", DateTime.Now.AddDays(6), false, false),
+                    new(Guid.NewGuid().ToString(), "Soy Sauce", "Bottled soy sauce", "100g", "Supermarket O", DateTime.Now.AddMonths(12), false, true)
                 }, "Ressources/Images/Recipes/vegetable_stir_fry.png", ""),
                 new("Omelette", "Simple cheese and ham omelette.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Eggs", "Fresh eggs", "3", "Supermarket B", DateTime.Now.AddDays(10), false, false),
-                    new(Guid.NewGuid().ToString(), "Cheese", "Grated cheddar cheese", "1", "Supermarket B", DateTime.Now.AddDays(20), false, false),
-                    new(Guid.NewGuid().ToString(), "Ham", "Sliced ham", "1", "Supermarket P", DateTime.Now.AddDays(7), false, false),
-                    new(Guid.NewGuid().ToString(), "Milk", "Whole milk", "1", "Supermarket B", DateTime.Now.AddDays(5), false, false)
+                    new(Guid.NewGuid().ToString(), "Cheese", "Grated cheddar cheese", "100g", "Supermarket B", DateTime.Now.AddDays(20), false, false),
+                    new(Guid.NewGuid().ToString(), "Ham", "Sliced ham", "100g", "Supermarket P", DateTime.Now.AddDays(7), false, false),
+                    new(Guid.NewGuid().ToString(), "Milk", "Whole milk", "100g", "Supermarket B", DateTime.Now.AddDays(5), false, false)
                 }, "Ressources/Images/Recipes/omelette.png", ""),
                 new("Fruit Salad", "Refreshing mixed fruit salad.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Bananas", "Fresh bananas", "2", "Supermarket H", DateTime.Now.AddDays(3), false, false),
-                    new(Guid.NewGuid().ToString(), "Oranges", "Juicy oranges", "2", "Supermarket I", DateTime.Now.AddDays(6), false, false),
+                    new(Guid.NewGuid().ToString(), "Oranges", "Juicy oranges", "200cl", "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Apples", "Crisp apples", "2", "Supermarket A", DateTime.Now.AddDays(7), false, false),
-                    new(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt", "1", "Supermarket N", DateTime.Now.AddDays(10), false, false)
+                    new(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt", "100g", "Supermarket N", DateTime.Now.AddDays(10), false, false)
                 }, "Ressources/Images/Recipes/fruit_salad.png", "")
             ];
         }
