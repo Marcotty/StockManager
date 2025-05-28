@@ -5,47 +5,24 @@
              xmlns:models="clr-namespace:StockManager.Model"
              xmlns:local="clr-namespace:StockManager.Pages"  
              Title="{Binding LocalRecipe.Name}">
-    <VerticalStackLayout>
+    <VerticalStackLayout Margin="10">
         <Image Source="{Binding LocalRecipe.Image}"  
             HeightRequest="180"  
             Aspect="AspectFill" />
         <Label Text="{Binding LocalRecipe.Description}"  
-            FontSize="14"  
+            HorizontalOptions="Center"
+            FontSize="16"  
             TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+        <Label Text="Ingredients : " FontAttributes="Bold" FontSize="15" />
         <CollectionView ItemsSource="{Binding LocalRecipe.Ingredients}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Item">
-                    <Grid >
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <VerticalStackLayout Padding="10">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" Text="Name : " FontSize="18" />
-                                <Label Grid.Column="1" Text="{Binding Name}" FontSize="18" />
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" Text="Quantity : " FontSize="18" />
-                                <Label Grid.Column="1" Text="{Binding Quantity}" FontSize="18" />
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" Text="Description : " FontSize="18" />
-                                <Label Grid.Column="1" Text="{Binding Description}" FontSize="18" />
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" Text="Location : " FontSize="18" />
-                                <Label Grid.Column="1" Text="{Binding Location}" FontSize="18" />
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" Text="Expiration date : " FontSize="18" />
-                                <Label Grid.Column="1" Text="{Binding ExpirationDate}" FontSize="18" />
-                            </StackLayout>
-                        </VerticalStackLayout>
-                    </Grid>
+                    <StackLayout Orientation="Horizontal" Padding="1" >
+                        <Label Text="{Binding Quantity} " FontSize="14"/>
+                        <Label Text=" " />
+                        <Label Text="{Binding Name}" FontSize="14" />
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
