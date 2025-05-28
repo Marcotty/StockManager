@@ -16,7 +16,7 @@
             Icon="storage.png">
             <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" Route="StoragePage"/>
         </Tab>
-        <Tab Title="Cart"
+        <Tab Title="Shopping"
             Icon="cart.png">
             <ShellContent ContentTemplate="{DataTemplate views:ShoppingPage}" Route="ShoppingPage"/>
         </Tab>
