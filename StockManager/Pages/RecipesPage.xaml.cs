@@ -36,7 +36,7 @@ public partial class RecipesPage : ContentPage
     private async void OnItemTapped(Recipe recipe)
     {
         if (recipe == null) return;
-        var itemDetailsPage = new RecipeDetailsPage(recipe);
+        var itemDetailsPage = new RecipeDetailsPage(_stockService, recipe);
         await Navigation.PushAsync(itemDetailsPage);
     }
 

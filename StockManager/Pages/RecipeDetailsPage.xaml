@@ -26,11 +26,34 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <ImageButton Source="cart.png" 
-            WidthRequest="10" 
-            HeightRequest="10" 
-            VerticalOptions="End" 
-            Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}"
-            />
+        <Label Text="{Binding LocalRecipe.Instructions}"/>
+        <Border
+            Stroke="LightGrey"
+            StrokeThickness="2"
+            Margin="15"
+            Padding="20">
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                    Offset="4,4"
+                    Radius="10"
+                    Opacity="0.2" />
+            </Border.Shadow>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"></RoundRectangle>
+            </Border.StrokeShape>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding LocalRecipe}" />
+                </StackLayout.GestureRecognizers>
+                <Label Text="Add to shopping list" 
+                       FontAttributes="Bold" 
+                       FontSize="15"
+                       VerticalOptions="Center"/>
+                <Image Source="cart.png" 
+                       WidthRequest="30" 
+                       HeightRequest="30" 
+                        />
+            </StackLayout>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>
