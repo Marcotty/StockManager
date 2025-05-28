@@ -12,7 +12,7 @@ namespace StockManager.Model
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
         public string Location { get; set; }
         public DateTime ExpirationDate { get; set; }
         public bool InCart { get; set; }
@@ -37,7 +37,7 @@ namespace StockManager.Model
             Id = Guid.NewGuid().ToString();
             Name = string.Empty;
             Description = string.Empty;
-            Quantity = 0;
+            Quantity = "";
             Location = string.Empty;
             ExpirationDate = DateTime.Now;
             InCart = false;
@@ -45,7 +45,7 @@ namespace StockManager.Model
             IsSelected = false;
         }
 
-        public Item(string id, string name, string description, int quantity, string location, DateTime expirationDate, bool inCart, bool inStock)
+        public Item(string id, string name, string description, string quantity, string location, DateTime expirationDate, bool inCart, bool inStock)
         {
             Id = id;
             Name = name;

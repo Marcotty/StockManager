@@ -63,7 +63,7 @@ public partial class ShoppingPage : ContentPage
             Id = string.Empty,
             Name = string.Empty,
             Description = string.Empty,
-            Quantity = 0,
+            Quantity = "",
             Location = string.Empty,
             ExpirationDate = DateTime.Now,
             InCart = true,
