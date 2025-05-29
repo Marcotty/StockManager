@@ -20,6 +20,7 @@
                 <DataTemplate x:DataType="models:Item">
                     <StackLayout Orientation="Horizontal" Padding="1" >
                         <Label Text="{Binding Quantity} " FontSize="14"/>
+                        <Label Text="{Binding QuantityUnit} " FontSize="14"/>
                         <Label Text=" " />
                         <Label Text="{Binding Name}" FontSize="14" />
                     </StackLayout>
