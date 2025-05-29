@@ -35,7 +35,7 @@
         <Border
             Stroke="LightGrey"
             StrokeThickness="2"
-            Margin="15"
+            Margin="10"
             Padding="20">
             <Border.Shadow>
                 <Shadow Brush="Black"
@@ -46,7 +46,7 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15"></RoundRectangle>
             </Border.StrokeShape>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" x:Name="CookButton">
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.CookItCommand}" CommandParameter="{Binding LocalRecipe}" />
                 </StackLayout.GestureRecognizers>
@@ -64,7 +64,7 @@
             Stroke="LightGrey"
             StrokeThickness="2"
             Margin="15"
-            Padding="20">
+            Padding="10">
             <Border.Shadow>
                 <Shadow Brush="Black"
                     Offset="4,4"
