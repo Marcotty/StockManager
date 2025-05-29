@@ -45,7 +45,7 @@
                                 <Border
                                     Stroke="LightGrey"
                                     StrokeThickness="2"
-                                    Padding="20">
+                                    Padding="10">
                                     <Border.Shadow>
                                         <Shadow Brush="Black"
                                             Offset="4,4"
@@ -59,7 +59,7 @@
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}" />
                                         </StackLayout.GestureRecognizers>
-                                        <Label Text="Add to shopping list" 
+                                        <Label Text="Cook it !" 
                                            FontAttributes="Bold" 
                                            FontSize="15"
                                            VerticalOptions="Center"/>
