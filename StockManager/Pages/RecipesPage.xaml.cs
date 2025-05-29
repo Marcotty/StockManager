@@ -31,6 +31,7 @@ public partial class RecipesPage : ContentPage
             FilteredRecipes.Add(item);
         }
         OnPropertyChanged(nameof(FilteredRecipes));
+        
     }
 
     private async void OnItemTapped(Recipe recipe)
