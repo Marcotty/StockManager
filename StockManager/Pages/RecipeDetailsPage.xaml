@@ -55,7 +55,7 @@
                FontAttributes="Bold" 
                FontSize="15"
                VerticalOptions="Center"/>
-                <Image Source="cart.png" 
+                <Image Source="chief.png" 
                WidthRequest="30" 
                HeightRequest="30" 
                 />
@@ -83,7 +83,7 @@
                        FontAttributes="Bold" 
                        FontSize="15"
                        VerticalOptions="Center"/>
-                <Image Source="cart.png" 
+                <Image Source="shopping_list.png" 
                        WidthRequest="30" 
                        HeightRequest="30" 
                         />

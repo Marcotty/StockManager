@@ -9,7 +9,7 @@
 
     <TabBar>
         <Tab Title="Recipes"
-            Icon="house.png">
+            Icon="cooking.png">
             <ShellContent ContentTemplate="{DataTemplate views:RecipesPage}" Route="RecipesPage"/>
         </Tab>
         <Tab Title="Stock"
@@ -17,7 +17,7 @@
             <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" Route="StoragePage"/>
         </Tab>
         <Tab Title="Shopping"
-            Icon="cart.png">
+            Icon="shopping_list.png">
             <ShellContent ContentTemplate="{DataTemplate views:ShoppingPage}" Route="ShoppingPage"/>
         </Tab>
     </TabBar>

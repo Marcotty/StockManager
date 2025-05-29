@@ -25,6 +25,7 @@ public partial class RecipeDetailsPage : ContentPage
     {
         base.OnAppearing();
         var child = CookButton.Children.FirstOrDefault();
+        canCook = _stockService.CanCookRecipe(LocalRecipe);
         if (!canCook)
         {
             if (child is Label)
@@ -47,7 +48,6 @@ public partial class RecipeDetailsPage : ContentPage
         bool confirm = await DisplayAlert("Cook It", $"Do you want to cook {recipe.Name}? Ingredients will be taken from stock", "Yes", "No");
         if (confirm)
         {
-            // Here you can add logic to handle the cooking process, like navigating to a cooking timer page or similar.
             _stockService.RemoveIngredientsFromRecipe(recipe);
             await DisplayAlert("Cooking", $"You are now cooking {recipe.Name}!", "OK");
         }

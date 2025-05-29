@@ -63,8 +63,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\Recipes\apple_pie.svg" />
 	  <None Remove="Resources\Images\Recipes\chicken_curry.svg" />
+	  <None Remove="Resources\Images\Recipes\chief.svg" />
+	  <None Remove="Resources\Images\Recipes\cooking.svg" />
 	  <None Remove="Resources\Images\Recipes\fruit_salad.svg" />
 	  <None Remove="Resources\Images\Recipes\omelette.svg" />
+	  <None Remove="Resources\Images\Recipes\shopping_list.svg" />
 	  <None Remove="Resources\Images\Recipes\spag.svg" />
 	  <None Remove="Resources\Images\Recipes\spaghetti.svg" />
 	  <None Remove="Resources\Images\Recipes\vegetable_stir_fry.svg" />
@@ -96,8 +99,11 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Recipes\apple_pie.svg" />
 	  <MauiImage Include="Resources\Images\Recipes\chicken_curry.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\chief.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\cooking.svg" />
 	  <MauiImage Include="Resources\Images\Recipes\fruit_salad.svg" />
 	  <MauiImage Include="Resources\Images\Recipes\omelette.svg" />
+	  <MauiImage Include="Resources\Images\Recipes\shopping_list.svg" />
 	  <MauiImage Include="Resources\Images\Recipes\spaghetti.svg" />
 	  <MauiImage Include="Resources\Images\Recipes\vegetable_stir_fry.svg" />
 	</ItemGroup>
