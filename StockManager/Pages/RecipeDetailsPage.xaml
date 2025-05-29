@@ -37,7 +37,7 @@
             Stroke="LightGrey"
             StrokeThickness="2"
             Margin="10"
-            Padding="20">
+            Padding="10">
             <Border.Shadow>
                 <Shadow Brush="Black"
             Offset="4,4"
