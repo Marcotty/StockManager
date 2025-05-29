@@ -24,6 +24,36 @@ namespace StockManager.Services
             _recipes = GetRecipes();
         }
 
+        public bool CanCookRecipe(Recipe recipe)
+        {
+            if (recipe == null || recipe.Ingredients == null || recipe.Ingredients.Count == 0)
+                return false;
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                var stockItem = _stockItems.FirstOrDefault(i => i.Name.Equals(ingredient.Name, StringComparison.OrdinalIgnoreCase));
+                if (stockItem == null || !stockItem.InStock || stockItem.Quantity != ingredient.Quantity)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void RemoveIngredientsFromRecipe(Recipe recipe)
+        {
+            if (recipe == null || recipe.Ingredients == null || recipe.Ingredients.Count == 0)
+                return;
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                var stockItem = _stockItems.FirstOrDefault(i => i.Name.Equals(ingredient.Name, StringComparison.OrdinalIgnoreCase));
+                if (stockItem != null && stockItem.InStock && stockItem.Quantity == ingredient.Quantity)
+                {
+                    stockItem.InStock = false;
+                    stockItem.InCart = false;
+                }
+            }
+        }
+
         public List<Recipe> GetRecipes()
         {
             if (_recipes != null && _recipes.Count > 0)

@@ -15,6 +15,8 @@ namespace StockManager.Services
         List<Item> GetItemsFromStock();
         void UpdateItemToStockList(Item item);
         void DeleteItemFromStock(string errandId);
+        bool CanCookRecipe(Recipe recipe);
+        void RemoveIngredientsFromRecipe(Recipe recipe);
         void AddItemToStockList(Item item);
         string AddNewItemToStockList();
         void ClearItemsFromStock();
