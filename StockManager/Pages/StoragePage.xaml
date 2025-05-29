@@ -68,7 +68,8 @@
                                         <Label Text="{Binding Description}" VerticalOptions="Center"/>
                                     </VerticalStackLayout>
                                     <StackLayout Padding="15" Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
-                                        <Label Text="{Binding Quantity, StringFormat='{0} item(s)'}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Quantity}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding QuantityUnit}" VerticalOptions="Center"/>
                                         <Label Text="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center"/>
                                     </StackLayout>
                                     <ImageButton Source="cart.png" Grid.Column="3" WidthRequest="10" HeightRequest="10" />

@@ -63,7 +63,8 @@ public partial class ShoppingPage : ContentPage
             Id = string.Empty,
             Name = string.Empty,
             Description = string.Empty,
-            Quantity = "",
+            Quantity = 0,
+            QuantityUnit = Item.QuantityUnits.None,
             Location = string.Empty,
             ExpirationDate = DateTime.Now,
             InCart = true,
@@ -79,7 +80,6 @@ public partial class ShoppingPage : ContentPage
         foreach (var item in itemsToRemove)
         {
             Items.Remove(item);
-            item.Quantity += 1; //item.Quantity; Todo : refactor quantity UI
             item.InCart = false;
             item.InStock = true;
             item.IsSelected = false;
