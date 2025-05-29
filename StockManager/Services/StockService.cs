@@ -31,7 +31,7 @@ namespace StockManager.Services
             foreach (var ingredient in recipe.Ingredients)
             {
                 var stockItem = _stockItems.FirstOrDefault(i => i.Name.Equals(ingredient.Name, StringComparison.OrdinalIgnoreCase));
-                if (stockItem == null || !stockItem.InStock || stockItem.Quantity != ingredient.Quantity)
+                if (stockItem == null || !stockItem.InStock || stockItem.Quantity < ingredient.Quantity)
                 {
                     return false;
                 }
@@ -46,10 +46,9 @@ namespace StockManager.Services
             foreach (var ingredient in recipe.Ingredients)
             {
                 var stockItem = _stockItems.FirstOrDefault(i => i.Name.Equals(ingredient.Name, StringComparison.OrdinalIgnoreCase));
-                if (stockItem != null && stockItem.InStock && stockItem.Quantity == ingredient.Quantity)
+                if (stockItem != null)
                 {
-                    stockItem.InStock = false;
-                    stockItem.InCart = false;
+                    stockItem.Quantity -= ingredient.Quantity;
                 }
             }
         }
