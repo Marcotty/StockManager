@@ -13,10 +13,23 @@ public partial class RecipeDetailsPage : ContentPage
     public ICommand CookItCommand => new Command<Recipe>(OnCookItClicked);
 
     public RecipeDetailsPage(IStockService stockService, Recipe recipe)
-	{
+    {
         InitializeComponent();
         _stockService = stockService;
         LocalRecipe = recipe;
+
+        flexLayout.Children.Clear();
+        foreach (var ingredient in LocalRecipe.Ingredients)
+        {
+            var label = new Label
+            {
+                Text = $"*   {ingredient.Name} ({ingredient.Quantity} {ingredient.QuantityUnit})",
+                FontSize = 12,
+                Margin = new Thickness(4, 2)
+            };
+            flexLayout.Children.Add(label);
+        }
+
         canCook = _stockService.CanCookRecipe(LocalRecipe);
         BindingContext = this;
     }
@@ -24,7 +37,7 @@ public partial class RecipeDetailsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        var child = CookButton.Children.FirstOrDefault();
+        var child = CookButton.Children.LastOrDefault();
         canCook = _stockService.CanCookRecipe(LocalRecipe);
         if (!canCook)
         {

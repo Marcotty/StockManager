@@ -5,69 +5,69 @@
              xmlns:models="clr-namespace:StockManager.Model"
              xmlns:local="clr-namespace:StockManager.Pages"  
              Title="{Binding LocalRecipe.Name}">
-    <VerticalStackLayout Margin="10">
-        <Image Source="{Binding LocalRecipe.Image}"  
-            HeightRequest="180"  
-            Aspect="AspectFill" />
-        <Label Text="{Binding LocalRecipe.Description}"  
-            HorizontalOptions="Center"
-            FontSize="16"  
-            TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
-        <Label Text="Ingredients : " FontAttributes="Bold" FontSize="15" />
-        <CollectionView ItemsSource="{Binding LocalRecipe.Ingredients}"
-                        SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Item">
-                    <StackLayout Orientation="Horizontal" Padding="1" >
-                        <Label Text="{Binding Quantity} " FontSize="14"/>
-                        <Label Text="{Binding QuantityUnit} " FontSize="14"/>
-                        <Label Text=" " />
-                        <Label Text="{Binding Name}" FontSize="14" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <ScrollView>
-            <VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ScrollView 
+            Grid.ColumnSpan="2" 
+            Grid.Row="0"
+            VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Margin="20">
+                <Image Source="{Binding LocalRecipe.Image}"  
+                HeightRequest="180"  
+                Aspect="AspectFill" />
+                <Label Text="{Binding LocalRecipe.Description}"  
+                    HorizontalOptions="Center"
+                    FontSize="16"  
+                    TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                <Border
+                     Stroke="LightGrey"
+                     StrokeThickness="2"
+                     Margin="6"
+                     Padding="10">
+                    <Border.Shadow>
+                        <Shadow 
+                            Brush="Black"
+                            Offset="4,4"
+                            Radius="10"
+                            Opacity="0.2" />
+                    </Border.Shadow>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"></RoundRectangle>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout>
+                        <Label 
+                            Text="Ingredients : " 
+                            FontAttributes="Bold" 
+                            FontSize="15" 
+                            HorizontalTextAlignment="Center"/>
+                        <FlexLayout x:Name="flexLayout" 
+                            Direction="Row" 
+                            Padding="10" 
+                            Wrap="Wrap"
+                            AlignSelf="Stretch"/>
+                    </VerticalStackLayout>
+                </Border>
                 <Label Text="Instructions : " FontAttributes="Bold" FontSize="15" />
-                <Label Text="{Binding LocalRecipe.Instructions}"/>
+                <Label Text="{Binding LocalRecipe.Instructions}" Margin="6"/>
             </VerticalStackLayout>
         </ScrollView>
         <Border
+            Grid.Row="1"
+            Grid.Column="2"
             Stroke="LightGrey"
             StrokeThickness="2"
             Margin="10"
             Padding="10">
             <Border.Shadow>
-                <Shadow Brush="Black"
-            Offset="4,4"
-            Radius="10"
-            Opacity="0.2" />
-            </Border.Shadow>
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"></RoundRectangle>
-            </Border.StrokeShape>
-            <StackLayout Orientation="Horizontal" x:Name="CookButton">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.CookItCommand}" CommandParameter="{Binding LocalRecipe}" />
-                </StackLayout.GestureRecognizers>
-                <Label Text="Cook it !" 
-               FontAttributes="Bold" 
-               FontSize="15"
-               VerticalOptions="Center"/>
-                <Image Source="chief.png" 
-               WidthRequest="30" 
-               HeightRequest="30" 
-                />
-            </StackLayout>
-        </Border>
-        <Border
-            Stroke="LightGrey"
-            StrokeThickness="2"
-            Margin="15"
-            Padding="10">
-            <Border.Shadow>
-                <Shadow Brush="Black"
+                <Shadow 
+                    Brush="Black"
                     Offset="4,4"
                     Radius="10"
                     Opacity="0.2" />
@@ -75,19 +75,62 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15"></RoundRectangle>
             </Border.StrokeShape>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout 
+                Orientation="Horizontal" 
+                x:Name="CookButton">
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding LocalRecipe}" />
+                    <TapGestureRecognizer 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.CookItCommand}" 
+                        CommandParameter="{Binding LocalRecipe}" />
                 </StackLayout.GestureRecognizers>
-                <Label Text="Add to shopping list" 
-                       FontAttributes="Bold" 
-                       FontSize="15"
-                       VerticalOptions="Center"/>
-                <Image Source="shopping_list.png" 
-                       WidthRequest="30" 
-                       HeightRequest="30" 
-                        />
+                <Image 
+                    Source="chief.png" 
+                    WidthRequest="30" 
+                    HeightRequest="30"/>
+                <Label 
+                    Text="  Cook it !" 
+                    FontAttributes="Bold" 
+                    FontSize="15"
+                    VerticalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
             </StackLayout>
         </Border>
-    </VerticalStackLayout>
+        <Border 
+            Grid.Row="1"
+            Grid.Column="0"
+            Stroke="LightGrey"
+            StrokeThickness="2"
+            Margin="10"
+            Padding="10">
+            <Border.Shadow>
+                <Shadow 
+                    Brush="Black"
+                    Offset="4,4"
+                    Radius="10"
+                    Opacity="0.2" />
+            </Border.Shadow>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"></RoundRectangle>
+            </Border.StrokeShape>
+            <StackLayout 
+                Orientation="Horizontal">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.AddRecipeToCartCommand}" 
+                        CommandParameter="{Binding LocalRecipe}" />
+                </StackLayout.GestureRecognizers>
+                <Image 
+                    Source="shopping_list.png" 
+                    WidthRequest="30" 
+                    HeightRequest="30" 
+                 />
+                <Label 
+                    Text="  Shop it !" 
+                    FontAttributes="Bold" 
+                    FontSize="15"
+                    VerticalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </Border>
+    </Grid>
 </ContentPage>
