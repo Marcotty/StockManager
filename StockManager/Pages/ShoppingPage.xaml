@@ -37,28 +37,79 @@
     </ContentPage.ToolbarItems>  
 
    <ScrollView>  
-       <VerticalStackLayout>  
-           <ListView ItemsSource="{Binding Items}">  
-               <ListView.ItemTemplate>  
-                   <DataTemplate x:DataType="models:Item">  
-                       <ViewCell>  
-                           <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">  
-                               <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}" VerticalOptions="Center" CheckedChanged="OnCheckBoxChanged" />  
-                               <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
-                                    <Entry Text="{Binding Name}" VerticalOptions="Center" TextChanged = "OnEntryTextChanged"/>  
-                               </StackLayout>  
-                               <Button Grid.Column="2"    
+       <VerticalStackLayout>
+            <Grid ColumnDefinitions="Auto,Auto" VerticalOptions="Center">
+                <CheckBox Grid.Column="0" IsChecked="False" CheckedChanged="OnCheckBoxAllSelectedChanged" />
+                <Picker
+                    Grid.Column="1"
+                    Title="Sort By" 
+                    HorizontalOptions="Center"
+                    SelectedIndexChanged="OnSortCriteriaChanged">
+                    <Picker.Items>
+                        <x:String>Name</x:String>
+                        <x:String>Quantity</x:String>
+                        <x:String>Reset</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Grid>
+            <ListView ItemsSource="{Binding FilteredItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Item">
+                        <ViewCell>
+                            <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" VerticalOptions="Center">
+                                <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}" VerticalOptions="Center" CheckedChanged="OnCheckBoxChanged" />
+                                <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+                                    <Entry Text="{Binding Name}" VerticalOptions="Center" TextChanged = "OnEntryTextChanged" IsTextPredictionEnabled="True" />
+                                </StackLayout>
+                                <Label Grid.Column="2" Text="{Binding Quantity}" VerticalOptions="Center" />
+                                <Label Grid.Column="3" Text="{Binding QuantityUnit}" VerticalOptions="Center" />
+                                <Button Grid.Column="4"    
                                Text="X"    
                                FontAttributes="Bold"    
                                Clicked="OnDeleteClicked"    
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}"    
                                BackgroundColor="Transparent"    
-                               VerticalOptions="Center" />  
-                           </Grid>  
-                       </ViewCell>  
-                   </DataTemplate>  
-               </ListView.ItemTemplate>  
-           </ListView>  
-       </VerticalStackLayout>  
+                               VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Border 
+                Stroke="LightGrey"
+                StrokeThickness="2"
+                Margin="10"
+                Padding="10">
+                <Border.Shadow>
+                    <Shadow 
+                        Brush="Black"
+                        Offset="4,4"
+                        Radius="10"
+                        Opacity="0.2" />
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"></RoundRectangle>
+                </Border.StrokeShape>
+                <StackLayout 
+                    Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeDetailsPage}}, Path=BindingContext.OnValidateClicked}" 
+                            CommandParameter="{Binding LocalRecipe}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image 
+                        Source="cart.png" 
+                        WidthRequest="30" 
+                        HeightRequest="30" 
+                    /> 
+                    <Label 
+                        Text="  Done" 
+                        FontAttributes="Bold" 
+                        FontSize="15"
+                        VerticalOptions="Center"
+                        HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Border>
+        </VerticalStackLayout>  
    </ScrollView>  
 </ContentPage>
