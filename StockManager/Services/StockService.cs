@@ -254,10 +254,8 @@ namespace StockManager.Services
                 return _stockItems;
             try
             {
-                // Define the file path to load the list
                 var filePath = Path.Combine(FileSystem.AppDataDirectory, "stock_data.txt");
 
-                // Check if the file exists
                 if (!File.Exists(filePath))
                 {
                     if (!File.Exists(filePath))
@@ -268,15 +266,12 @@ namespace StockManager.Services
                 }
                 else
                 {
-                    // Read the file content
                     var fileContent = File.ReadAllText(filePath);
-
-                    // Parse the file content and populate the errands list
                     var itemsData = fileContent.Split(new[] { new string('-', 20) }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var errandData in itemsData)
                     {
                         var lines = errandData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                        if (lines.Length < 4) continue;
+                        if (lines.Length < 9) continue;
 
                         var id = lines[0].Replace("Id: ", "").Trim();
                         var name = lines[1].Replace("Name: ", "").Trim();
@@ -284,7 +279,15 @@ namespace StockManager.Services
                         var quantity = int.Parse(lines[3].Replace("Quantity: ", "").Trim());
                         var quantityUnit = lines[4].Replace("QuantityUnit: ", "").Trim();
                         var location = lines[5].Replace("Location: ", "").Trim();
-                        var expirationDate = DateTime.Parse(lines[6].Replace("Expiration Date: ", "").Trim());
+                        var expirationDateString = lines[6].Replace("Expiration Date: ", "").Trim();
+                        DateTime expirationDate;
+                        if (!DateTime.TryParse(expirationDateString, System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.None, out expirationDate))
+                        {
+                            if (!DateTime.TryParse(expirationDateString, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out expirationDate))
+                            {
+                                expirationDate = DateTime.MinValue;
+                            }
+                        }
                         var inCart = bool.Parse(lines[7].Replace("In Cart: ", "").Trim());
                         var inStock = bool.Parse(lines[8].Replace("In Stock: ", "").Trim());
 
