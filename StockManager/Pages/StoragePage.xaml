@@ -4,8 +4,9 @@
              x:Class="StockManager.Pages.StoragePage"  
              x:DataType="local:StoragePage"
              xmlns:models="clr-namespace:StockManager.Model"
-             xmlns:local="clr-namespace:StockManager.Pages"  
-             Title="Stock">
+             xmlns:local="clr-namespace:StockManager.Pages"
+             xmlns:string="clr-namespace:StockManager.Properties;assembly=StockManager"
+             Title="{x:Static string:Resources.StorageLabel}">
     <ContentPage.ToolbarItems>
 
         <ToolbarItem Text="Cart"   
