@@ -40,6 +40,7 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<NeutralLanguage>en</NeutralLanguage>
+		<DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -110,17 +111,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\AppResources.en.Designer.cs">
+	  <Compile Update="Resources\AppResources.Designer.cs">
+	    <DependentUpon>AppResources.resx</DependentUpon>
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppResources.en.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\AppResources.fr.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AppResources.fr.resx</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\AppResources.en.resx">
+	  <EmbeddedResource Update="Resources\AppResources.resx">
+	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
 	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\AppResources.fr.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AppResources.fr.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 
