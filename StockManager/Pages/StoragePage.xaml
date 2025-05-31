@@ -6,7 +6,8 @@
              xmlns:models="clr-namespace:StockManager.Model"
              xmlns:local="clr-namespace:StockManager.Pages"
              xmlns:string="clr-namespace:StockManager.Properties;assembly=StockManager"
-             Title="{x:Static string:Resources.StorageLabel}">
+             Title="{x:Static string:Resources.StorageLabel}"
+             >
     <ContentPage.ToolbarItems>
 
         <ToolbarItem Text="Cart"   

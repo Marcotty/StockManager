@@ -4,15 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:StockManager.Pages"
-    xmlns:views="clr-namespace:StockManager.Pages">
-
+    xmlns:views="clr-namespace:StockManager.Pages"
+    xmlns:string="clr-namespace:StockManager.Properties;assembly=StockManager">
 
     <TabBar>
         <Tab Title="Recipes"
             Icon="cooking.png">
             <ShellContent ContentTemplate="{DataTemplate views:RecipesPage}" Route="RecipesPage"/>
         </Tab>
-        <Tab Title="Stock"
+        <Tab Title="{x:Static string:Resources.StorageLabel}"
             Icon="storage.png">
             <ShellContent ContentTemplate="{DataTemplate views:StoragePage}" Route="StoragePage"/>
         </Tab>
