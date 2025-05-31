@@ -111,26 +111,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\AppResources.Designer.cs">
-	    <DependentUpon>AppResources.resx</DependentUpon>
+	  <Compile Update="Properties\Resources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
-	  </Compile>
-	  <Compile Update="Resources\AppResources.fr.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppResources.fr.resx</DependentUpon>
+	    <DependentUpon>Resources.resx</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\AppResources.resx">
-	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+	  <EmbeddedResource Update="Properties\Resources.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Resources\AppResources.fr.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppResources.fr.Designer.cs</LastGenOutput>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 
