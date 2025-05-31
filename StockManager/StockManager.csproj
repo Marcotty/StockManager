@@ -108,4 +108,19 @@
 	  <MauiImage Include="Resources\Images\Recipes\vegetable_stir_fry.svg" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Resources\AppResources.en.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AppResources.en.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\AppResources.en.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
 </Project>
