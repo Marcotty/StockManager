@@ -61,11 +61,119 @@ namespace StockManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string AccountLabel {
+            get {
+                return ResourceManager.GetString("AccountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddLabel {
+            get {
+                return ResourceManager.GetString("AddLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cart.
+        /// </summary>
+        public static string CartLabel {
+            get {
+                return ResourceManager.GetString("CartLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear shopping list.
+        /// </summary>
+        public static string ClearShoppingList {
+            get {
+                return ResourceManager.GetString("ClearShoppingList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteLabel {
+            get {
+                return ResourceManager.GetString("DeleteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to    Done.
+        /// </summary>
+        public static string DoneLabel {
+            get {
+                return ResourceManager.GetString("DoneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipes.
+        /// </summary>
+        public static string RecipesLabel {
+            get {
+                return ResourceManager.GetString("RecipesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search items.
+        /// </summary>
+        public static string SearchItemsLabel {
+            get {
+                return ResourceManager.GetString("SearchItemsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search recipes.
+        /// </summary>
+        public static string SearchRecipesPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchRecipesPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shopping.
+        /// </summary>
+        public static string ShoppingLabel {
+            get {
+                return ResourceManager.GetString("ShoppingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort By.
+        /// </summary>
+        public static string SortByLabel {
+            get {
+                return ResourceManager.GetString("SortByLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage.
         /// </summary>
         public static string StorageLabel {
             get {
                 return ResourceManager.GetString("StorageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validate shopping list.
+        /// </summary>
+        public static string ValidateShoppingLabel {
+            get {
+                return ResourceManager.GetString("ValidateShoppingLabel", resourceCulture);
             }
         }
     }

@@ -5,7 +5,8 @@
             x:DataType="local:ShoppingPage"
             xmlns:models="clr-namespace:StockManager.Model" 
             xmlns:local="clr-namespace:StockManager.Pages"
-            Title="Shopping">  
+            xmlns:string="clr-namespace:StockManager.Properties;assembly=StockManager"
+            Title="{x:Static string:Resources.ShoppingLabel}">  
    <ContentPage.ToolbarItems>
 
         <ToolbarItem Text="&lt;-"   
@@ -14,19 +15,19 @@
              Priority="0"
              IsEnabled="{Binding IsReverseEnabled}"
              Clicked="OnReverseClicked" />
-        
-       <ToolbarItem Text="Add"   
+
+        <ToolbarItem Text="{x:Static string:Resources.AddLabel}"   
                 IconImageSource="add.png"   
                 Order="Primary"   
                 Priority="0"   
                 Clicked="OnAddItem" />
 
-        <ToolbarItem Text="Validate shopping list"   
+        <ToolbarItem Text="{x:Static string:Resources.ValidateShoppingLabel}"  
         IconImageSource="{AppThemeBinding Light=validate_icon_light.png, Dark=validate_icon_dark.png}"   
         Order="Secondary"   
         Priority="1"   
         Clicked="OnValidateClicked" />
-        <ToolbarItem Text="Clear shopping list"   
+        <ToolbarItem Text="{x:Static string:Resources.ClearShoppingList}" 
         Order="Secondary"   
         Priority="2"   
         Clicked="OnClearShoppingListClicked" />
@@ -42,7 +43,7 @@
                 <CheckBox Grid.Column="0" IsChecked="False" CheckedChanged="OnCheckBoxAllSelectedChanged" />
                 <Picker
                     Grid.Column="1"
-                    Title="Sort By" 
+                    Title="{x:Static string:Resources.SortByLabel}" 
                     HorizontalOptions="Center"
                     SelectedIndexChanged="OnSortCriteriaChanged">
                     <Picker.Items>
@@ -103,7 +104,7 @@
                         HeightRequest="30" 
                     /> 
                     <Label 
-                        Text="  Done" 
+                        Text="{x:Static string:Resources.DoneLabel}"
                         FontAttributes="Bold" 
                         FontSize="15"
                         VerticalOptions="Center"

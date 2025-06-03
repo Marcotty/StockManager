@@ -4,11 +4,12 @@
             x:Class="StockManager.Pages.RecipesPage"  
             x:DataType="local:RecipesPage"
             xmlns:models="clr-namespace:StockManager.Model"
-            xmlns:local="clr-namespace:StockManager.Pages">
-    
+            xmlns:local="clr-namespace:StockManager.Pages"
+            xmlns:string="clr-namespace:StockManager.Properties;assembly=StockManager">
+
     <Grid BackgroundColor="{StaticResource White}"
           RowDefinitions="Auto,*,Auto">
-        <SearchBar Placeholder="Search recipes"  
+        <SearchBar Placeholder="{x:Static string:Resources.SearchRecipesPlaceholder}"  
            TextChanged="OnSearchBarTextChanged" 
            Margin="10"/>
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">

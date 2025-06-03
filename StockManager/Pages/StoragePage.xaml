@@ -10,7 +10,7 @@
              >
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem Text="Cart"   
+        <ToolbarItem Text="{x:Static string:Resources.CartLabel}"
             IconImageSource="cart.png"   
             Order="Primary"   
             Priority="0"   
@@ -23,13 +23,13 @@
             IsEnabled="{Binding IsReverseEnabled}"
             Clicked="OnReverseClicked" />
 
-        <ToolbarItem Text="Delete"   
+        <ToolbarItem Text="{x:Static string:Resources.DeleteLabel}"
             IconImageSource="delete.png"   
             Order="Primary"   
             Priority="0"   
             Clicked="OnDeleteItems" />
-        
-        <ToolbarItem Text="Add"   
+
+        <ToolbarItem Text="{x:Static string:Resources.AddLabel}" 
             IconImageSource="add.png"   
             Order="Primary"   
             Priority="0"   
@@ -46,7 +46,7 @@
         </Grid.ColumnDefinitions>
         <ScrollView Grid.ColumnSpan="2">
             <VerticalStackLayout>
-                <SearchBar Placeholder="Search items"  
+                <SearchBar Placeholder="{x:Static string:Resources.SearchItemsLabel}"
                        TextChanged="OnSearchBarTextChanged" />
                 <CollectionView x:Name="collectionView" 
                             ItemsSource="{Binding FilteredStock}" 
@@ -112,7 +112,7 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-        <Picker Grid.ColumnSpan="2" Grid.Row="1" Title="Sort By" HorizontalOptions="Center"
+        <Picker Grid.ColumnSpan="2" Grid.Row="1" Title="{x:Static string:Resources.SortByLabel}" HorizontalOptions="Center"
     SelectedIndexChanged="OnSortCriteriaChanged">
             <Picker.Items>
                 <x:String>Name</x:String>

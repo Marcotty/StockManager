@@ -117,7 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountLabel" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="AddLabel" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="CartLabel" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="ClearShoppingList" xml:space="preserve">
+    <value>Vider la liste de courses</value>
+  </data>
+  <data name="DeleteLabel" xml:space="preserve">
+    <value>Suprimer</value>
+  </data>
+  <data name="DoneLabel" xml:space="preserve">
+    <value>   Terminer</value>
+  </data>
+  <data name="RecipesLabel" xml:space="preserve">
+    <value>Recettes</value>
+  </data>
+  <data name="SearchItemsLabel" xml:space="preserve">
+    <value>Rechercher des objets</value>
+  </data>
+  <data name="SearchRecipesPlaceholder" xml:space="preserve">
+    <value>Rechercher une recette</value>
+  </data>
+  <data name="ShoppingLabel" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="SortByLabel" xml:space="preserve">
+    <value>Trier</value>
+  </data>
   <data name="StorageLabel" xml:space="preserve">
     <value>Stockage</value>
+  </data>
+  <data name="ValidateShoppingLabel" xml:space="preserve">
+    <value>Valider la liste de courses</value>
   </data>
 </root>
