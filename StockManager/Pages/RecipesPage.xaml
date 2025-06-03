@@ -9,44 +9,30 @@
 
     <Grid BackgroundColor="{StaticResource White}"
           RowDefinitions="Auto,*,Auto">
-        <SearchBar Placeholder="{x:Static string:Resources.SearchRecipesPlaceholder}"  
+        <SearchBar Grid.Row="0" Placeholder="{x:Static string:Resources.SearchRecipesPlaceholder}"  
            TextChanged="OnSearchBarTextChanged" 
            Margin="10"/>
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
-            <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}" Spacing="8">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="models:Recipe">
-                        <Border    
-                            Stroke="LightGrey"
-                            StrokeThickness="1"
-                            Background="White"
-                            Margin="10">
-                            <Border.Shadow>
-                                <Shadow Brush="Black"
-                                    Offset="4,4"
-                                    Radius="10"
-                                    Opacity="0.2" />
-                            </Border.Shadow>
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="15"></RoundRectangle>
-                            </Border.StrokeShape>
-                            <VerticalStackLayout HorizontalOptions="Center" Padding="48" Spacing="10" BackgroundColor="White">
-                                <VerticalStackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
-                                </VerticalStackLayout.GestureRecognizers>
-                                <Image Source="{Binding Image}" 
-                                   HeightRequest="180"  
-                                   Aspect="AspectFill" />
-                                <Label Text="{Binding Name}"  
-                                   FontSize="24"  
-                                   FontAttributes="Bold" />
-                                <Label Text="{Binding Description}"  
-                                   FontSize="14"  
-                                   TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
-                                <Border IsVisible="False"
+            <VerticalStackLayout>
+                <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout>
+                        <Button Text="Categorie1"/>
+                        <Button Text="Categorie1"/>
+                        <Button Text="Categorie1"/>
+                        <Button Text="Categorie1"/>
+                        <Button Text="Categorie1"/>
+                        <Button Text="Categorie1"/>
+                        <Button Text="Categorie1"/>
+                    </HorizontalStackLayout>
+                </ScrollView>
+                <StackLayout BindableLayout.ItemsSource="{Binding FilteredRecipes}" Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Recipe">
+                                <Border    
                                     Stroke="LightGrey"
-                                    StrokeThickness="2"
-                                    Padding="10">
+                                    StrokeThickness="1"
+                                    Background="White"
+                                    Margin="10">
                                     <Border.Shadow>
                                         <Shadow Brush="Black"
                                             Offset="4,4"
@@ -56,25 +42,52 @@
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="15"></RoundRectangle>
                                     </Border.StrokeShape>
-                                    <StackLayout Orientation="Horizontal" x:Name="CookButton">
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}" />
-                                        </StackLayout.GestureRecognizers>
-                                        <Label Text="Cook it !" 
-                                           FontAttributes="Bold" 
-                                           FontSize="15"
-                                           VerticalOptions="Center"/>
-                                        <Image Source="cart.png" 
-                                           WidthRequest="30" 
-                                           HeightRequest="30" 
-                                        />
-                                    </StackLayout>
+                                    <VerticalStackLayout HorizontalOptions="Center" Padding="48" Spacing="10" BackgroundColor="White">
+                                        <VerticalStackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.ItemTappedCommand}" CommandParameter="{Binding}" />
+                                        </VerticalStackLayout.GestureRecognizers>
+                                        <Image Source="{Binding Image}" 
+                                           HeightRequest="180"  
+                                           Aspect="AspectFill" />
+                                        <Label Text="{Binding Name}"  
+                                           FontSize="24"  
+                                           FontAttributes="Bold" />
+                                        <Label Text="{Binding Description}"  
+                                           FontSize="14"  
+                                           TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                                        <Border IsVisible="False"
+                                            Stroke="LightGrey"
+                                            StrokeThickness="2"
+                                            Padding="10">
+                                            <Border.Shadow>
+                                                <Shadow Brush="Black"
+                                                    Offset="4,4"
+                                                    Radius="10"
+                                                    Opacity="0.2" />
+                                            </Border.Shadow>
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="15"></RoundRectangle>
+                                            </Border.StrokeShape>
+                                            <StackLayout Orientation="Horizontal" x:Name="CookButton">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipesPage}}, Path=BindingContext.AddRecipeToCartCommand}" CommandParameter="{Binding}" />
+                                                </StackLayout.GestureRecognizers>
+                                                <Label Text="Cook it !" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="15"
+                                                   VerticalOptions="Center"/>
+                                                <Image Source="cart.png" 
+                                                   WidthRequest="30" 
+                                                   HeightRequest="30" 
+                                                />
+                                            </StackLayout>
+                                        </Border>
+                                    </VerticalStackLayout>
                                 </Border>
-                            </VerticalStackLayout>
-                        </Border>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </VerticalStackLayout>
         </ScrollView>
     </Grid>
 </ContentPage>
