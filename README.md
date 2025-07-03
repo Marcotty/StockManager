@@ -32,3 +32,11 @@ Instructions for iOS and Desktop will be added soon.
 
 👨‍💻 Author
 Developed by Marcotty as a professional solo project.
+
+## 🛡️ License
+
+This project is proprietary. All rights reserved © 2025 Marcotty.
+
+No part of this source code may be copied, modified, distributed, or used in any form without explicit written permission from the author.
+
+For licensing inquiries, please contact: [your-email@example.com]
