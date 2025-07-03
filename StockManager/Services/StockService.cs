@@ -65,7 +65,10 @@ namespace StockManager.Services
                     new(Guid.NewGuid().ToString(), "Flour", "All-purpose flour", 200, Item.QuantityUnits.Gram, "Supermarket B", DateTime.Now.AddMonths(6), false, false),
                     new(Guid.NewGuid().ToString(), "Sugar", "Granulated sugar", 100, Item.QuantityUnits.Gram, "Supermarket C", DateTime.Now.AddMonths(12), true, false),
                     new(Guid.NewGuid().ToString(), "Butter", "Unsalted butter", 50, Item.QuantityUnits.Gram, "Supermarket D", DateTime.Now.AddDays(15), false, false)
-                }, "Ressources/Images/Recipes/apple_pie.png", ""),
+                }, "Ressources/Images/Recipes/apple_pie.png", "", new List<String>
+                {
+                    "Dessert", "Fruity", "Baking"
+                }),
                 new("Spaghetti Bolognese", "Classic Italian pasta dish.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Spaghetti", "Dry spaghetti pasta", 200, Item.QuantityUnits.Gram, "Supermarket F", DateTime.Now.AddMonths(12), false, false),
@@ -81,35 +84,50 @@ namespace StockManager.Services
                 "Lower the heat and simmer the sauce uncovered for 20 to 30 minutes. Stir occasionally.\r\n" +
                 "Meanwhile, cook the spaghetti in a pot of salted boiling water until al dente. Drain.\r\n" +
                 "Serve the spaghetti topped with the Bolognese sauce.\r\n" +
-                "Garnish with fresh herbs and grated Parmesan if desired."),
+                "Garnish with fresh herbs and grated Parmesan if desired.", new List<String>
+                {
+                    "Dessert", "Fruity", "Baking", "Midi"
+                }),
                 new("Chicken Curry", "Spicy chicken curry with rice.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Chicken", "Boneless chicken pieces", 100, Item.QuantityUnits.Gram, "Supermarket E", DateTime.Now.AddDays(2), false, false),
                     new(Guid.NewGuid().ToString(), "Curry Powder", "Spicy curry powder", 100, Item.QuantityUnits.Gram, "Supermarket M", DateTime.Now.AddMonths(12), false, true),
                     new(Guid.NewGuid().ToString(), "Coconut Milk", "Canned coconut milk", 100, Item.QuantityUnits.Milliliter, "Supermarket N", DateTime.Now.AddMonths(6), false, true),
                     new(Guid.NewGuid().ToString(), "Rice", "Basmati rice", 100, Item.QuantityUnits.Gram, "Supermarket D", DateTime.Now.AddMonths(6), false, true)
-                }, "Ressources/Images/Recipes/chicken_curry.png", ""),
+                }, "Ressources/Images/Recipes/chicken_curry.png", "", new List<String>
+                {
+                    "Dessert", "Fruity", "Baking"
+                }),
                 new("Vegetable Stir Fry", "Healthy mixed vegetable stir fry.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Broccoli", "Fresh broccoli", 100, Item.QuantityUnits.Gram, "Supermarket H", DateTime.Now.AddDays(5), false, false),
                     new(Guid.NewGuid().ToString(), "Carrots", "Sliced carrots", 200, Item.QuantityUnits.Gram, "Supermarket K", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Bell Pepper", "Red bell pepper", 100, Item.QuantityUnits.Gram, "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Soy Sauce", "Bottled soy sauce", 100, Item.QuantityUnits.Gram, "Supermarket O", DateTime.Now.AddMonths(12), false, true)
-                }, "Ressources/Images/Recipes/vegetable_stir_fry.png", ""),
+                }, "Ressources/Images/Recipes/vegetable_stir_fry.png", "", new List<String>
+                {
+                    "Dessert", "Fruity", "Baking", "Midi"
+                }),
                 new("Omelette", "Simple cheese and ham omelette.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Eggs", "Fresh eggs", 3, Item.QuantityUnits.None, "Supermarket B", DateTime.Now.AddDays(10), false, false),
                     new(Guid.NewGuid().ToString(), "Cheese", "Grated cheddar cheese", 100, Item.QuantityUnits.Gram, "Supermarket B", DateTime.Now.AddDays(20), false, false),
                     new(Guid.NewGuid().ToString(), "Ham", "Sliced ham", 100, Item.QuantityUnits.Gram, "Supermarket P", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Milk", "Whole milk", 100, Item.QuantityUnits.Gram, "Supermarket B", DateTime.Now.AddDays(5), false, false)
-                }, "Ressources/Images/Recipes/omelette.png", ""),
+                }, "Ressources/Images/Recipes/omelette.png", "", new List<String>
+                {
+                    "Dessert", "Fruity", "Baking", "Midi", "Matin"
+                }),
                 new("Fruit Salad", "Refreshing mixed fruit salad.", new List<Item>
                 {
                     new(Guid.NewGuid().ToString(), "Bananas", "Fresh bananas", 2, Item.QuantityUnits.None, "Supermarket H", DateTime.Now.AddDays(3), false, false),
                     new(Guid.NewGuid().ToString(), "Oranges", "Juicy oranges", 200, Item.QuantityUnits.Milliliter, "Supermarket I", DateTime.Now.AddDays(6), false, false),
                     new(Guid.NewGuid().ToString(), "Apples", "Crisp apples", 2, Item.QuantityUnits.None, "Supermarket A", DateTime.Now.AddDays(7), false, false),
                     new(Guid.NewGuid().ToString(), "Yogurt", "Plain yogurt", 100, Item.QuantityUnits.Gram, "Supermarket N", DateTime.Now.AddDays(10), false, false)
-                }, "Ressources/Images/Recipes/fruit_salad.png", "")
+                }, "Ressources/Images/Recipes/fruit_salad.png", "", new List<String>
+                {
+                    "Dessert", "Fruity", "Baking", "Midi", "Matin"
+                })
             ];
         }
 

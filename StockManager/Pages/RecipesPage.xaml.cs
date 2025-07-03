@@ -7,12 +7,11 @@ namespace StockManager.Pages;
 
 public partial class RecipesPage : ContentPage
 {
-	private readonly IStockService _stockService;
+    private readonly IStockService _stockService;
     private List<Recipe> _recipes;
     public ObservableCollection<Recipe> FilteredRecipes { get; set; }
     public ICommand AddRecipeToCartCommand => new Command<Recipe>(OnAddToCartClicked);
     public ICommand ItemTappedCommand => new Command<Recipe>(OnItemTapped);
-
     public RecipesPage(IStockService stockService)
     {
         InitializeComponent();
@@ -31,7 +30,51 @@ public partial class RecipesPage : ContentPage
             FilteredRecipes.Add(item);
         }
         OnPropertyChanged(nameof(FilteredRecipes));
-        
+    }
+
+    private void OnFilterAllTimeClicked(object sender, EventArgs args)
+    {
+        FilteredRecipes.Clear();
+        foreach (var item in _recipes)
+        {
+            FilteredRecipes.Add(item);
+        }
+        OnPropertyChanged(nameof(FilteredRecipes));
+    }
+
+    private void OnFilterMidiClicked(object sender, EventArgs args)
+    {
+        FilterOnTag("Midi");
+    }
+
+    private void OnFilterMatinClicked(object sender, EventArgs args)
+    {
+        FilterOnTag("Matin");
+    }
+
+    private void OnFilterSoirClicked(object sender, EventArgs args)
+    {
+        FilterOnTag("Soir");
+    }
+
+    private void OnFilterEnCasClicked(object sender, EventArgs args)
+    {
+        FilterOnTag("EnCas");
+    }
+    private void OnFilterDessertClicked(object sender, EventArgs args)
+    {
+        FilterOnTag("Dessert");
+    }
+
+    private void FilterOnTag(string tag)
+    {
+        FilteredRecipes.Clear();
+        var filteredItems = _recipes.Where(item => item.Tags.Contains(tag)).ToList();
+        foreach (var item in filteredItems)
+        {
+            FilteredRecipes.Add(item);
+        }
+        OnPropertyChanged(nameof(FilteredRecipes));
     }
 
     private async void OnItemTapped(Recipe recipe)
@@ -48,7 +91,7 @@ public partial class RecipesPage : ContentPage
         {
             _stockService.UpdateItemToShoppingList(ingredient);
         }
-        bool confirm = await DisplayAlert("Success", $"{recipe.Name} ingredients has been added to your shopping list.\\n Go to shopping list ?", "Yes", "No");
+        bool confirm = await DisplayAlert("Success", $"{recipe.Name} ingredients has been added to your shopping list.\n Go to shopping list ?", "Yes", "No");
         if (confirm)
         {
             await Shell.Current.GoToAsync("//ShoppingPage");
