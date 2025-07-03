@@ -1,42 +1,43 @@
-# StockManager
 🧑‍🍳 Culinart
-Culinart is a cross-platform recipe management application designed to simplify daily cooking, meal planning, and ingredient shopping—whether you're cooking solo or managing meals with your household.
+Culinart is a cross-platform recipe management app designed to simplify daily cooking, meal planning, and ingredient shopping—whether you're cooking solo or with your household.
 
 📌 Features
-📚 Browse & manage recipes: Scroll through a social-media-style feed or manually add your own recipes (CRUD).
+📚 Browse & manage recipes: Scroll through a social-style feed or add your own recipes (CRUD operations).
 
-🔍 Smart search & filters: Search recipes by name, ingredients, or country of origin. Filter by meal type (breakfast, lunch, dinner, etc.).
+🔍 Smart search & filters: Search by recipe name, ingredient, or country. Filter by meal type (morning, lunch, dinner, snack...).
 
-🛒 Shopping list planner: Automatically generate shopping lists based on selected recipes.
+🛒 Shopping list planner: Automatically generates shopping lists based on selected recipes.
 
-📆 Meal planner: Organize your meals throughout the week using a built-in calendar.
+🧾 Ingredient stock: Keep track of what you already have and expiration dates.
 
-❤️ Favorites: Save and organize your favorite recipes.
+📆 Meal planner: Organize your meals on a calendar.
 
-🤝 Multi-user sharing: Share recipes, shopping lists, and meal plans with other users—ideal for families.
+❤️ Favorites: Save your favorite recipes for quick access.
 
-📤 Export to PDF: Generate and export recipes or shopping lists as PDFs.
+🤝 Multi-user support: Share recipes, shopping lists, and plans within a household.
+
+📤 PDF export: Export recipes or shopping lists.
 
 🛠 Tech Stack
-Frontend (Mobile App): C# with .NET MAUI (Android available, others in progress)
+Frontend: C# with .NET MAUI (currently Android, other platforms in progress)
 
-Backend: Java with Spring Boot (REST API for user services and recipe discovery)
+Backend: Java (Spring Boot) – RESTful API for user and recipe services
 
-Architecture: Client/Server model using microservices for clear modularity
+Architecture: Microservices – clear modular separation between services
 
-Database: MySQL (schema in progress)
+Database: MySQL (schema in development)
 
 🚀 Installation
-📱 Currently available on Google Play Store (Android only).
-Instructions for iOS and Desktop will be added soon.
+Currently available on Google Play Store (Android only).
+Instructions for iOS and desktop platforms will follow.
+
+📸 Screenshots
+Recipe Feed	Ingredient Stock	Shopping List
+		
+
+🛡️ License
+This project is proprietary. All rights reserved © 2025 Marcotty.
+No part of this code may be copied, modified, or distributed without explicit written permission.
 
 👨‍💻 Author
 Developed by Marcotty as a professional solo project.
-
-## 🛡️ License
-
-This project is proprietary. All rights reserved © 2025 Marcotty.
-
-No part of this source code may be copied, modified, distributed, or used in any form without explicit written permission from the author.
-
-For licensing inquiries, please contact: [your-email@example.com]
