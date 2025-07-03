@@ -8,4 +8,4 @@ No part of this codebase may be copied, distributed, modified, or reused without
 This repository is provided for informational and demonstration purposes only.  
 Commercial use, redistribution, or reverse engineering is strictly prohibited unless licensed in writing.
 
-For licensing inquiries, please contact: [your-email@example.com]
+For licensing inquiries, please contact: [macottyfred@gmail.com]
